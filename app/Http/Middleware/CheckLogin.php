@@ -18,10 +18,10 @@ class CheckLogin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check()&&Auth::user()->email == "manhdeptrai@admin.com") {
+        if (Auth::check() && Auth::user()->email == "manhdeptrai@admin.com") {
             return $next($request);
         } else {
-            return redirect("/")->with('status','You are not Admin');
+            return redirect("/")->with('status', 'You are not Admin');
         }
     }
 }

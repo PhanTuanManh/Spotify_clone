@@ -6,6 +6,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // Route::get('/category', 'CategoryController@index');
         // // Route::post('/admin/category-store',[CategoryController::class, 'store']);
         // Route::post('/category-store', 'CategoryController@store');
+
+        Route::get('/admin', [UserController::class, 'dashboard'])->middleware('checklogin::class');
+
+        Route::get('/user', [UserController::class, 'index'])->middleware('checklogin::class');
+        Route::get('/user-edit/{id}', 'UserController@edit')->middleware('checklogin::class');
 
 
         // Product

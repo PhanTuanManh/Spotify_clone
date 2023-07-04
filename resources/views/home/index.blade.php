@@ -112,7 +112,7 @@
                     @if (auth()->user()->email == 'manhdeptrai@admin.com')
                         <ul>
                             <li>
-                                <a href="{{ url('/product/index') }}">Admin</a>
+                                <a href="{{ url('/admin') }}">Admin</a>
                             </li>
                         @else
                             <ul>
@@ -126,8 +126,8 @@
                     <li class="divider">|</li>
                     </ul>
                     <!-- <li>
-                                        <a href="#">Sign Up</a>
-                                      </li> -->
+                                                <a href="#">Sign Up</a>
+                                              </li> -->
                     <!-- <button type="button" class="button1">Sign up</button> -->
                     <button class="user-container" id="myButton">
                         <div class="user-fame" style="width: 28px; height:28px; inset-inline-start: 0px;">
@@ -489,7 +489,8 @@
         <div class="song-bar">
             <div class="song-infos now-playing">
                 <div class="image-container song-art">
-                    <img src="{{asset('image/product/1680927047_artworks-000682696024-t8xa2d-t500x500.jpg')}}" alt="" /> 
+                    <img src="{{ asset('image/product/1680927047_artworks-000682696024-t8xa2d-t500x500.jpg') }}"
+                        alt="" />
                 </div>
                 <div class="song-description">
                     <p class="title track-name">
