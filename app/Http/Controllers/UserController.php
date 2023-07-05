@@ -46,4 +46,13 @@ class UserController extends Controller
         // Chuyển hướng người dùng đến trang danh sách người dùng hoặc trang chi tiết người dùng đã được cập nhật
         return redirect('/user')->with('status', 'Your data has been saved');
     }
+
+    // UserController.php
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect('/user')->with('status', 'Your data has been deleted');
+    }
 }

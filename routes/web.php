@@ -72,7 +72,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/user', [UserController::class, 'index'])->middleware('checklogin::class');
         Route::get('/user-edit/{id}', 'UserController@edit')->middleware('checklogin::class');
         Route::put('/user-update/{id}', 'UserController@update')->name('user.update')->middleware('checklogin');
-
+        Route::delete('/user-delete/{id}', 'UserController@delete')->name('user.delete')->middleware('checklogin');
 
 
         // Product

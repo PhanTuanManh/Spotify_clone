@@ -66,7 +66,11 @@
 
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-danger">DELETE</a>
+                                            <form action="/user-delete/{{ $user->User_id }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">DELETE</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
