@@ -38,18 +38,12 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->username = $request->input('username');
         $user->user_type = $request->input('user_type');
-
-        // Lấy giá trị Plan_id dựa trên Plan_name được chọn
-        $planName = $request->input('plan_name');
-        $subscription = Subcription::where('Plan_name', $planName)->first();
-        if ($subscription) {
-            $user->Plan_id = $subscription->id;
-        }
+        $user->Plan_id = $request->input('plan_id');
 
         // Lưu thông tin người dùng đã được cập nhật vào cơ sở dữ liệu
         $user->save();
 
         // Chuyển hướng người dùng đến trang danh sách người dùng hoặc trang chi tiết người dùng đã được cập nhật
-        return redirect('/user')->with('success', 'Your data has been saved');
+        return redirect('/user')->with('status', 'Your data has been saved');
     }
 }

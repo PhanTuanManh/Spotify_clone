@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+
 class LoginRequest extends FormRequest
 {
     /**
@@ -64,7 +65,7 @@ class LoginRequest extends FormRequest
     {
         $factory = $this->container->make(ValidationFactory::class);
 
-        return ! $factory->make(
+        return !$factory->make(
             ['username' => $param],
             ['username' => 'email']
         )->fails();

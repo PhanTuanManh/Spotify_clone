@@ -10,6 +10,11 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title"> Edit User</h4>
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <form action="{{ route('user.update', ['id' => $users->User_id]) }}" method="POST">
@@ -36,11 +41,11 @@
                                 value="{{ $users->user_type }}">
                         </div>
                         <div class="form-group">
-                            <label for="plan_name">Plan Name</label>
+                            <label for="plan_id">Plan Name</label>
                             <select name="plan_id" id="plan_id" class="form-control">
                                 @foreach ($subscriptions as $subscription)
-                                    <option value="{{ $subscription->id }}"
-                                        {{ $users->Plan_id == $subscription->id ? 'selected' : '' }}>
+                                    <option value="{{ $subscription->Plan_id }}"
+                                        {{ $users->Plan_id == $subscription->Plan_id ? 'selected' : '' }}>
                                         {{ $subscription->Plan_name }}
                                     </option>
                                 @endforeach

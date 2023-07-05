@@ -20,7 +20,8 @@
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <link rel="icon" type="image/png"
+        href="https://th.bing.com/th/id/OIP.5yQi2rM-RxPdD7yS2xV99AHaF7?w=274&h=219&c=7&r=0&o=5&dpr=1.3&pid=1.7">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
         @yield('title')
@@ -54,52 +55,46 @@
             </div>
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
-                    <li>
-                        <a href="./dashboard.html">
+                    <li class="active">
+                        <a href="/admin">
                             <i class="now-ui-icons design_app"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a href="./icons.html">
+                        <a href="/user">
                             <i class="now-ui-icons education_atom"></i>
-                            <p>Icons</p>
+                            <p>Users</p>
                         </a>
                     </li>
                     <li>
                         <a href="./map.html">
                             <i class="now-ui-icons location_map-big"></i>
-                            <p>Maps</p>
+                            <p>Artists</p>
                         </a>
                     </li>
                     <li>
                         <a href="./notifications.html">
                             <i class="now-ui-icons ui-1_bell-53"></i>
-                            <p>Notifications</p>
+                            <p>Songs</p>
                         </a>
                     </li>
                     <li>
                         <a href="./user.html">
                             <i class="now-ui-icons users_single-02"></i>
-                            <p>User Profile</p>
-                        </a>
-                    </li>
-                    <li class="active ">
-                        <a href="./tables.html">
-                            <i class="now-ui-icons design_bullet-list-67"></i>
-                            <p>Table List</p>
+                            <p>Albums</p>
                         </a>
                     </li>
                     <li>
-                        <a href="./typography.html">
-                            <i class="now-ui-icons text_caps-small"></i>
-                            <p>Typography</p>
+                        <a href="./tables.html">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>Track</p>
                         </a>
                     </li>
                     <li class="active-pro">
                         <a href="./upgrade.html">
                             <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-                            <p>Upgrade to PRO</p>
+                            <p>Download Data</p>
                         </a>
                     </li>
                 </ul>
