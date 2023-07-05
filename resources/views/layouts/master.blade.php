@@ -85,10 +85,10 @@
                             <p>Albums</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="./tables.html">
+                    <li class="{{ 'genre' == request()->path() ? 'active' : '' }}">
+                        <a href="/genre">
                             <i class="now-ui-icons design_bullet-list-67"></i>
-                            <p>Track</p>
+                            <p>Genres</p>
                         </a>
                     </li>
                     <li class="active-pro">

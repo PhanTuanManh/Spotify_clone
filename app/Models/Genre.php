@@ -10,6 +10,7 @@ class Genre extends Model
     use HasFactory;
 
     protected $fillable = ['Name', 'Description'];
+    protected $primaryKey = 'Genre_id';
 
     public function songs()
     {

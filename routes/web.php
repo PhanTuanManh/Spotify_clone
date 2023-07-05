@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +81,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::put('/artist-update/{id}', 'ArtistController@update')->name('artist.update')->middleware('checklogin');
         Route::delete('/artist-delete/{id}', 'ArtistController@delete')->name('artist.delete')->middleware('checklogin');
 
+        Route::post('/genre', 'GenreController@store')->name('genre.store')->middleware('checklogin');
+        Route::get('/genre', 'GenreController@index')->name('genre.index')->middleware('checklogin');
+        Route::get('/genre-edit/{id}', 'GenreController@edit')->name('genre.edit')->middleware('checklogin');
+        Route::put('/genre-update/{id}', 'GenreController@update')->name('genre.update')->middleware('checklogin');
+        Route::delete('/genre-delete/{id}', 'GenreController@delete')->name('genre.delete')->middleware('checklogin');
         // Product
         // Route::get('/admin', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // 
