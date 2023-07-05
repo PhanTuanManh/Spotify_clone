@@ -10,6 +10,8 @@ class Artists extends Model
     use HasFactory;
     protected $fillable = ['Name', 'Descriptions', 'Avatar'];
 
+    protected $primaryKey = 'Artist_id';
+
     public function artists()
     {
         return $this->belongsToMany(Artist::class, 'song_artist', 'song_id', 'artist_id');

@@ -74,6 +74,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::put('/user-update/{id}', 'UserController@update')->name('user.update')->middleware('checklogin');
         Route::delete('/user-delete/{id}', 'UserController@delete')->name('user.delete')->middleware('checklogin');
 
+        Route::post('/artist', 'ArtistController@store')->name('artist.store')->middleware('checklogin');
+        Route::get('/artist', 'ArtistController@index')->name('artist.index')->middleware('checklogin');
+        Route::get('/artist-edit/{id}', 'ArtistController@edit')->name('artist.edit')->middleware('checklogin');
+        Route::put('/artist-update/{id}', 'ArtistController@update')->name('artist.update')->middleware('checklogin');
+        Route::delete('/artist-delete/{id}', 'ArtistController@delete')->name('artist.delete')->middleware('checklogin');
 
         // Product
         // Route::get('/admin', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');

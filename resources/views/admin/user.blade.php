@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Dashboard | Sources
+    Dashboard | User Management
 @endsection
 
 @section('content')

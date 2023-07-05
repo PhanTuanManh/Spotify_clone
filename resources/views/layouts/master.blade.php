@@ -55,32 +55,32 @@
             </div>
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="active">
+                    <li class="{{ 'admin' == request()->path() ? 'active' : '' }}">
                         <a href="/admin">
                             <i class="now-ui-icons design_app"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ 'user' == request()->path() ? 'active' : '' }}">
                         <a href="/user">
                             <i class="now-ui-icons education_atom"></i>
                             <p>Users</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="./map.html">
+                    <li class="{{ 'artist' == request()->path() ? 'active' : '' }}">
+                        <a href="/artist">
                             <i class="now-ui-icons location_map-big"></i>
                             <p>Artists</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="./notifications.html">
+                    <li class="{{ 'Songs' == request()->path() ? 'active' : '' }}">
+                        <a href="/Songs">
                             <i class="now-ui-icons ui-1_bell-53"></i>
                             <p>Songs</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="./user.html">
+                    <li class="{{ 'Albums' == request()->path() ? 'active' : '' }}">
+                        <a href="Albums">
                             <i class="now-ui-icons users_single-02"></i>
                             <p>Albums</p>
                         </a>

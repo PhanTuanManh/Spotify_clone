@@ -26,7 +26,7 @@ class UserController extends Controller
         $users = User::findOrFail($users);
         $subscriptions = Subcription::all();
         // Trả về view edit.blade.php với dữ liệu người dùng
-        return view('admin.edit', compact('users', 'subscriptions'));
+        return view('admin.user-edit', compact('users', 'subscriptions'));
     }
 
     public function update(Request $request, $id)
@@ -46,7 +46,6 @@ class UserController extends Controller
         // Chuyển hướng người dùng đến trang danh sách người dùng hoặc trang chi tiết người dùng đã được cập nhật
         return redirect('/user')->with('status', 'Your data has been saved');
     }
-
     // UserController.php
     public function delete($id)
     {
