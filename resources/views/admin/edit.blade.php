@@ -12,7 +12,7 @@
                     <h4 class="card-title"> Edit User</h4>
                 </div>
                 <div class="card-body">
-                    <form action="/user-update/{{ $users->User_id }}" method="POST">
+                    <form action="{{ route('user.update', ['id' => $users->User_id]) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
