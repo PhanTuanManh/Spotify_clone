@@ -79,8 +79,8 @@
                             <p>Songs</p>
                         </a>
                     </li>
-                    <li class="{{ 'Albums' == request()->path() ? 'active' : '' }}">
-                        <a href="Albums">
+                    <li class="{{ 'album' == request()->path() ? 'active' : '' }}">
+                        <a href="/album">
                             <i class="now-ui-icons users_single-02"></i>
                             <p>Albums</p>
                         </a>

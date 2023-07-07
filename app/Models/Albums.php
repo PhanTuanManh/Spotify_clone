@@ -10,6 +10,7 @@ class Albums extends Model
     use HasFactory;
     protected $fillable = ['Name', 'Release_date', 'Thumbnail'];
 
+    protected $primaryKey = 'Album_id';
     public function artists()
     {
         return $this->belongsToMany(Artist::class, 'album_artist', 'album_id', 'artist_id');

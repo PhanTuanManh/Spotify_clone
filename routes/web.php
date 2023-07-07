@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SongController;
+use App\Http\Controllers\AlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/song-edit/{id}', 'SongController@edit')->name('song.edit')->middleware('checklogin');
         Route::put('/song-update/{id}', 'SongController@update')->name('song.update')->middleware('checklogin');
         Route::delete('/song-delete/{id}', 'SongController@delete')->name('song.delete')->middleware('checklogin');
+
+        Route::post('/album', 'AlbumController@store')->name('album.store')->middleware('checklogin');
+        Route::get('/album', 'AlbumController@index')->name('album.index')->middleware('checklogin');
+        Route::get('/album-edit/{id}', 'AlbumController@edit')->name('album.edit')->middleware('checklogin');
+        Route::put('/album-update/{id}', 'AlbumController@update')->name('album.update')->middleware('checklogin');
+        Route::delete('/album-delete/{id}', 'AlbumController@delete')->name('album.delete')->middleware('checklogin');
         // Product
         // Route::get('/admin', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // 
