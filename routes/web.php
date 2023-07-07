@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\SongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +87,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/genre-edit/{id}', 'GenreController@edit')->name('genre.edit')->middleware('checklogin');
         Route::put('/genre-update/{id}', 'GenreController@update')->name('genre.update')->middleware('checklogin');
         Route::delete('/genre-delete/{id}', 'GenreController@delete')->name('genre.delete')->middleware('checklogin');
+
+        Route::post('/song', 'SongController@store')->name('song.store')->middleware('checklogin');
+        Route::get('/song', 'SongController@index')->name('song.index')->middleware('checklogin');
+        Route::get('/song-edit/{id}', 'SongController@edit')->name('song.edit')->middleware('checklogin');
+        Route::put('/song-update/{id}', 'SongController@update')->name('song.update')->middleware('checklogin');
+        Route::delete('/song-delete/{id}', 'SongController@delete')->name('song.delete')->middleware('checklogin');
         // Product
         // Route::get('/admin', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // 

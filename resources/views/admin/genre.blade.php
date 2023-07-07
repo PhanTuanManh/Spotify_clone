@@ -62,7 +62,7 @@
                                     <tr>
                                         <td>{{ $genre->Genre_id }}</td>
                                         <td>{{ $genre->Name }}</td>
-                                        <td>{{ $genre->Description }}</td>
+                                        <td>{{ Str::limit($genre->Description, 50) }}</td>
                                         <td>
                                             <a href="{{ route('genre.edit', ['id' => $genre->Genre_id]) }}"
                                                 class="btn btn-success">EDIT</a>
