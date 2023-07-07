@@ -10,6 +10,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SongAlbumController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -70,7 +73,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         // // Route::post('/admin/category-store',[CategoryController::class, 'store']);
         // Route::post('/category-store', 'CategoryController@store');
 
-        Route::get('/admin', [UserController::class, 'dashboard'])->middleware('checklogin::class');
+        Route::get('/admin', 'DashboardController@index')->middleware('checklogin');
 
         Route::get('/user', [UserController::class, 'index'])->middleware('checklogin::class');
         Route::get('/user-edit/{id}', 'UserController@edit')->middleware('checklogin::class');
@@ -95,12 +98,19 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::put('/song-update/{id}', 'SongController@update')->name('song.update')->middleware('checklogin');
         Route::delete('/song-delete/{id}', 'SongController@delete')->name('song.delete')->middleware('checklogin');
 
+
         Route::post('/album', 'AlbumController@store')->name('album.store')->middleware('checklogin');
         Route::get('/album', 'AlbumController@index')->name('album.index')->middleware('checklogin');
         Route::get('/album-edit/{id}', 'AlbumController@edit')->name('album.edit')->middleware('checklogin');
         Route::put('/album-update/{id}', 'AlbumController@update')->name('album.update')->middleware('checklogin');
         Route::delete('/album-delete/{id}', 'AlbumController@delete')->name('album.delete')->middleware('checklogin');
-        // Product
+
+
+        Route::post('/song-album', 'SongAlbumController@store')->name('song-album.store')->middleware('checklogin');
+        Route::get('/song-album', 'SongAlbumController@index')->name('song-album.index')->middleware('checklogin');
+        Route::get('/song-album-edit/{id}', 'SongAlbumController@edit')->name('song-album.edit')->middleware('checklogin');
+        Route::put('/song-album-update/{id}', 'SongAlbumController@update')->name('song-album.update')->middleware('checklogin');
+        Route::delete('/song-album-delete/{albumId}/{songId}', 'SongAlbumController@delete')->name('song-album.delete')->middleware('checklogin');
         // Route::get('/admin', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // 
         Route::get('/product/index', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');

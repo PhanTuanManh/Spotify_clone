@@ -91,6 +91,12 @@
                             <p>Genres</p>
                         </a>
                     </li>
+                    <li class="{{ 'song-album' == request()->path() ? 'active' : '' }}">
+                        <a href="/song-album">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>Song & Album</p>
+                        </a>
+                    </li>
                     <li class="active-pro">
                         <a href="./upgrade.html">
                             <i class="now-ui-icons arrows-1_cloud-download-93"></i>
@@ -141,8 +147,8 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="now-ui-icons location_world"></i>
                                     <p>
                                         <span class="d-lg-none d-md-block">Some Actions</span>
@@ -223,6 +229,8 @@
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
     <script src="../assets/demo/demo.js"></script>
+
+    <script src="{{ asset('assets/js/sweetalert.js') }}"></script>
 
     @yield('scripts')
 </body>
