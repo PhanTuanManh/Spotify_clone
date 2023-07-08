@@ -15,7 +15,7 @@ class Playlist extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'User_id');
+        return $this->belongsTo(User::class, 'User_id', 'User_id');
     }
 
     public function songs()

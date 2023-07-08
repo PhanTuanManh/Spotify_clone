@@ -47,48 +47,54 @@
     -->
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text logo-mini">
-                    CT
+                    MP
                 </a>
                 <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-                    Creative Tim
+                    Admin Page
                 </a>
             </div>
             <div class="sidebar-wrapper" id="sidebar-wrapper">
                 <ul class="nav">
                     <li class="{{ 'admin' == request()->path() ? 'active' : '' }}">
                         <a href="/admin">
-                            <i class="now-ui-icons design_app"></i>
+                            <i class="now-ui-icons business_chart-bar-32"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li class="{{ 'user' == request()->path() ? 'active' : '' }}">
                         <a href="/user">
-                            <i class="now-ui-icons education_atom"></i>
+                            <i class="now-ui-icons users_single-02"></i>
                             <p>Users</p>
                         </a>
                     </li>
                     <li class="{{ 'artist' == request()->path() ? 'active' : '' }}">
                         <a href="/artist">
-                            <i class="now-ui-icons location_map-big"></i>
+                            <i class="now-ui-icons users_circle-08"></i>
                             <p>Artists</p>
                         </a>
                     </li>
                     <li class="{{ 'song' == request()->path() ? 'active' : '' }}">
                         <a href="/song">
-                            <i class="now-ui-icons ui-1_bell-53"></i>
+                            <i class="now-ui-icons media-2_note-03"></i>
                             <p>Songs</p>
-                        </a>
-                    </li>
-                    <li class="{{ 'album' == request()->path() ? 'active' : '' }}">
-                        <a href="/album">
-                            <i class="now-ui-icons users_single-02"></i>
-                            <p>Albums</p>
                         </a>
                     </li>
                     <li class="{{ 'genre' == request()->path() ? 'active' : '' }}">
                         <a href="/genre">
-                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <i class="now-ui-icons location_compass-05"></i>
                             <p>Genres</p>
+                        </a>
+                    </li>
+                    <li class="{{ 'album' == request()->path() ? 'active' : '' }}">
+                        <a href="/album">
+                            <i class="now-ui-icons files_single-copy-04"></i>
+                            <p>Albums</p>
+                        </a>
+                    </li>
+                    <li class="{{ 'track' == request()->path() ? 'active' : '' }}">
+                        <a href="/track">
+                            <i class="now-ui-icons tech_headphones"></i>
+                            <p>Track</p>
                         </a>
                     </li>
                     <li class="{{ 'song-album' == request()->path() ? 'active' : '' }}">
@@ -109,12 +115,12 @@
                             <p>Artist & Song</p>
                         </a>
                     </li>
-                    <li class="active-pro">
+                    {{-- <li class="active-pro">
                         <a href="./upgrade.html">
                             <i class="now-ui-icons arrows-1_cloud-download-93"></i>
                             <p>Download Data</p>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

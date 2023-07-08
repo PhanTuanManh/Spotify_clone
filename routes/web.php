@@ -12,6 +12,8 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SongAlbumController;
+use App\Http\Controllers\TrackController;
+
 
 
 /*
@@ -123,6 +125,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/artist-song', 'SongArtistController@index')->name('artist-song.index')->middleware('checklogin');
         Route::get('/artist-song-edit/{id}', 'SongArtistController@edit')->name('artist-song.edit')->middleware('checklogin');
         Route::delete('/artist-song-delete/{songId}/{artistId}', 'SongArtistController@delete')->name('artist-song.delete')->middleware('checklogin');
+
+        Route::post('/track', 'TrackController@store')->name('track.store')->middleware('checklogin');
+        Route::get('/track', 'TrackController@index')->name('track.index')->middleware('checklogin');
+        Route::get('/track-edit/{id}', 'TrackController@edit')->name('track.edit')->middleware('checklogin');
+        Route::put('/track-update/{id}', 'TrackController@update')->name('track.update')->middleware('checklogin');
+        Route::delete('/track-delete/{id}', 'TrackController@delete')->name('track.delete')->middleware('checklogin');
         // Route::get('/product/index', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // Route::get('/product/create', [ProductController::class, 'create'])->name('products.create')->middleware('checklogin::class');;
         // Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy')->middleware('checklogin::class');;

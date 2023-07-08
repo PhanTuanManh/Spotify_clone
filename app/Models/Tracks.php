@@ -12,8 +12,7 @@ class Tracks extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'Album_id',
-        'Name',
+        'Name', 'Thumbnail',
     ];
 
     public function album()

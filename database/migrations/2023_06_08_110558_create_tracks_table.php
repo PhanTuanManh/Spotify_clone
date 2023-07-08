@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('Track_id');
             $table->integer('Album_id')->unsigned();
             $table->string('Name');
+            $table->string('Thumbnail');
             $table->timestamps();
 
             $table->foreign('Album_id')->references('Album_id')->on('albums')->onDelete('cascade');

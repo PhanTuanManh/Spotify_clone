@@ -51,7 +51,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Album & Artist Management</h4>
+                    <h4 class="card-title">Artist & Album Management</h4>
                     <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#exampleModal">ADD</button>
                 </div>

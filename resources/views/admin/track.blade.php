@@ -10,45 +10,43 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Song</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Track</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('song-album.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('track.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="song_id">Song:</label>
-                            <select class="form-control" name="song_id" id="song_id">
-                                <option value="">Select Song</option>
-                                @if (isset($songs))
-                                    @foreach ($songs as $song)
-                                        <option value="{{ $song->Song_id }}">{{ $song->Name }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                value="{{ old('name') }}">
                         </div>
-                        <div class="form-group">
-                            <label for="album_id">Album:</label>
-                            <select class="form-control" name="album_id" id="album_id">
+                        <div class="form-group mt-4">
+                            <label for="thumbnail" class="col-form-label">Thumbnail:</label>
+                            <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
+                        </div>
+                        <div class="form-group mt-4">
+                            <label for="album_id" class="col-form-label">Album:</label>
+                            <select class="form-control" id="album_id" name="album_id">
                                 <option value="">Select Album</option>
-                                @if (isset($albums))
+                                <!-- Thêm option trống để người dùng có thể chọn -->
+                                @isset($albums)
                                     @foreach ($albums as $album)
                                         <option value="{{ $album->Album_id }}">{{ $album->Name }}</option>
                                     @endforeach
-                                @endif
+                                @endisset
                             </select>
                         </div>
+                        <!-- Add other track-related fields here -->
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add Album-Song</button>
+                            <button type="submit" class="btn btn-primary">Add Track</button>
                         </div>
                     </form>
-
                 </div>
-
 
             </div>
         </div>
@@ -57,7 +55,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Song & Album Management</h4>
+                    <h4 class="card-title">Track Management</h4>
                     <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#exampleModal">ADD</button>
                 </div>
@@ -65,23 +63,33 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="text-primary">
-                                <th>Song</th>
+                                <th>Track ID</th>
+                                <th>Name</th>
                                 <th>Album</th>
-                                {{-- <th>EDIT</th> --}}
+                                <th>Thumbnail</th>
+                                <th>EDIT</th>
                                 <th>DELETE</th>
                             </thead>
                             <tbody>
-                                @foreach ($albumSongs as $albumSong)
+                                @foreach ($tracks as $track)
                                     <tr>
-                                        <td>{{ $albumSong->song->Name }}</td>
-                                        <td>{{ $albumSong->album->Name }}</td>
-                                        {{-- <td>
-                                            <a href="{{ route('song-album.edit', ['id' => $albumSong->song_id]) }}"
-                                                class="btn btn-success">EDIT</a>
-                                        </td> --}}
+                                        <td>{{ $track->Track_id }}</td>
+                                        <td>{{ $track->Name }}</td>
+                                        <td>{{ $track->album->Name }}</td>
                                         <td>
-                                            <form
-                                                action="{{ route('song-album.delete', ['albumId' => $albumSong->album_id, 'songId' => $albumSong->song_id]) }}"
+                                            @if ($track->Thumbnail)
+                                                <img src="{{ asset('track_thumbnails/' . $track->Thumbnail) }}"
+                                                    alt="{{ $track->Name }}" width="50">
+                                            @else
+                                                No Thumbnail
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('track.edit', ['id' => $track->Track_id]) }}"
+                                                class="btn btn-success">EDIT</a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('track.delete', ['id' => $track->Track_id]) }}"
                                                 method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -94,10 +102,6 @@
                         </table>
                     </div>
                 </div>
-
-
-
-
 
             </div>
         </div>
