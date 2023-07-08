@@ -109,25 +109,25 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/song-album', 'SongAlbumController@store')->name('song-album.store')->middleware('checklogin');
         Route::get('/song-album', 'SongAlbumController@index')->name('song-album.index')->middleware('checklogin');
         Route::get('/song-album-edit/{id}', 'SongAlbumController@edit')->name('song-album.edit')->middleware('checklogin');
-        Route::put('/song-album-update/{id}', 'SongAlbumController@update')->name('song-album.update')->middleware('checklogin');
+        // Route::put('/song-album-update/{albumSong}', 'SongAlbumController@update')->name('song-album.update')->middleware('checklogin');
         Route::delete('/song-album-delete/{albumId}/{songId}', 'SongAlbumController@delete')->name('song-album.delete')->middleware('checklogin');
         // Route::get('/admin', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // 
-        Route::get('/product/index', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
-        Route::get('/product/create', [ProductController::class, 'create'])->name('products.create')->middleware('checklogin::class');;
-        Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy')->middleware('checklogin::class');;
-        Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('products.edit')->middleware('checklogin::class');;
-        Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('products.update');
-        Route::get('/product/show/{id}', [ProductController::class, 'show'])->name('products.show')->middleware('checklogin::class');;
-        Route::post('/product/store', [ProductController::class, 'store'])->name('products.store');
+        // Route::get('/product/index', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
+        // Route::get('/product/create', [ProductController::class, 'create'])->name('products.create')->middleware('checklogin::class');;
+        // Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy')->middleware('checklogin::class');;
+        // Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('products.edit')->middleware('checklogin::class');;
+        // Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('products.update');
+        // Route::get('/product/show/{id}', [ProductController::class, 'show'])->name('products.show')->middleware('checklogin::class');;
+        // Route::post('/product/store', [ProductController::class, 'store'])->name('products.store');
 
-        //Category
-        Route::get('/category/index', [CategoryController::class, 'index'])->name('category.index')->middleware('checklogin::class');;
-        Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create')->middleware('checklogin::class');;
-        Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy')->middleware('checklogin::class');;
-        Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit')->middleware('checklogin::class');;
-        Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-        Route::get('/category/show/{id}', [CategoryController::class, 'show'])->name('category.show')->middleware('checklogin::class');;
-        Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+        // //Category
+        // Route::get('/category/index', [CategoryController::class, 'index'])->name('category.index')->middleware('checklogin::class');;
+        // Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create')->middleware('checklogin::class');;
+        // Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy')->middleware('checklogin::class');;
+        // Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit')->middleware('checklogin::class');;
+        // Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+        // Route::get('/category/show/{id}', [CategoryController::class, 'show'])->name('category.show')->middleware('checklogin::class');;
+        // Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
     });
 });

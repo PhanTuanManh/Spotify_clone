@@ -51,15 +51,6 @@ class SongAlbumController extends Controller
     }
 
 
-    // public function edit($id)
-    // {
-    //     $albumSong = AlbumSong::where('song_id', $id)->firstOrFail();
-    //     $songs = Songs::all();
-    //     $albums = Albums::all();
-
-    //     return view('admin.song-album-edit', compact('albumSong', 'songs', 'albums'));
-    // }
-
     public function edit(AlbumSong $albumSong)
     {
         $songs = Songs::pluck('Name', 'Song_id');
@@ -69,14 +60,28 @@ class SongAlbumController extends Controller
     }
 
 
-    public function update(Request $request, AlbumSong $albumSong)
-    {
-        $albumSong->song_id = $request->input('song_id');
-        $albumSong->album_id = $request->input('album_id');
-        $albumSong->save();
+    // public function update(Request $request, AlbumSong $albumSong)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'song_id' => 'required|exists:songs,Song_id',
+    //         'album_id' => 'required|exists:albums,Album_id',
+    //     ]);
 
-        return redirect('/song-album')->with('success', 'Album song updated successfully');
-    }
+    //     if ($validator->fails()) {
+    //         return redirect()->back()
+    //             ->withErrors($validator)
+    //             ->withInput();
+    //     }
+
+    //     $albumSong->song_id = $request->input('song_id');
+    //     $albumSong->album_id = $request->input('album_id');
+    //     $albumSong->save();
+
+    //     return redirect('/song-album')->with('success', 'Album-Song updated successfully');
+    // }
+
+
+
 
     // public function update(Request $request, $id)
     // {

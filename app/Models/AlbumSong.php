@@ -15,7 +15,7 @@ class AlbumSong extends Model
         'album_id'
     ];
 
-    protected $primaryKey = ['song_id', 'album_id'];
+    protected $primaryKey = 'id';
 
     public function song()
     {

@@ -67,7 +67,7 @@
                             <thead class="text-primary">
                                 <th>Song</th>
                                 <th>Album</th>
-                                <th>EDIT</th>
+                                {{-- <th>EDIT</th> --}}
                                 <th>DELETE</th>
                             </thead>
                             <tbody>
@@ -75,10 +75,10 @@
                                     <tr>
                                         <td>{{ $albumSong->song->Name }}</td>
                                         <td>{{ $albumSong->album->Name }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <a href="{{ route('song-album.edit', ['id' => $albumSong->song_id]) }}"
                                                 class="btn btn-success">EDIT</a>
-                                        </td>
+                                        </td> --}}
                                         <td>
                                             <form
                                                 action="{{ route('song-album.delete', ['albumId' => $albumSong->album_id, 'songId' => $albumSong->song_id]) }}"
