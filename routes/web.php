@@ -113,6 +113,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::delete('/song-album-delete/{albumId}/{songId}', 'SongAlbumController@delete')->name('song-album.delete')->middleware('checklogin');
         // Route::get('/admin', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // 
+
+        Route::post('/artist-album', 'AlbumArtistController@store')->name('artist-album.store')->middleware('checklogin');
+        Route::get('/artist-album', 'AlbumArtistController@index')->name('artist-album.index')->middleware('checklogin');
+        Route::get('/artist-album-edit/{id}', 'AlbumArtistController@edit')->name('artist-album.edit')->middleware('checklogin');
+        Route::delete('/artist-album-delete/{albumId}/{artistId}', 'AlbumArtistController@delete')->name('artist-album.delete')->middleware('checklogin');
+
+        Route::post('/artist-song', 'SongArtistController@store')->name('artist-song.store')->middleware('checklogin');
+        Route::get('/artist-song', 'SongArtistController@index')->name('artist-song.index')->middleware('checklogin');
+        Route::get('/artist-song-edit/{id}', 'SongArtistController@edit')->name('artist-song.edit')->middleware('checklogin');
+        Route::delete('/artist-song-delete/{songId}/{artistId}', 'SongArtistController@delete')->name('artist-song.delete')->middleware('checklogin');
         // Route::get('/product/index', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // Route::get('/product/create', [ProductController::class, 'create'])->name('products.create')->middleware('checklogin::class');;
         // Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy')->middleware('checklogin::class');;

@@ -5,25 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AlbumSong extends Model
+class SongArtist extends Model
 {
     use HasFactory;
-    protected $table = 'album_song';
+    protected $table = 'song_artist';
     public $incrementing = false;
     protected $fillable = [
         'song_id',
-        'album_id'
+        'artist_id',
     ];
 
-    protected $primaryKey = ['song_id', 'album_id'];
+    protected $primaryKey = ['song_id', 'artist_id'];
 
     public function song()
     {
         return $this->belongsTo(Songs::class, 'song_id', 'Song_id');
     }
 
-    public function album()
+    public function artist()
     {
-        return $this->belongsTo(Albums::class, 'album_id', 'Album_id');
+        return $this->belongsTo(Artists::class, 'artist_id', 'Artist_id');
     }
 }

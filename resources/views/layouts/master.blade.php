@@ -97,6 +97,18 @@
                             <p>Song & Album</p>
                         </a>
                     </li>
+                    <li class="{{ 'artist-album' == request()->path() ? 'active' : '' }}">
+                        <a href="/artist-album">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>Artist & Album</p>
+                        </a>
+                    </li>
+                    <li class="{{ 'artist-song' == request()->path() ? 'active' : '' }}">
+                        <a href="/artist-song">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>Artist & Song</p>
+                        </a>
+                    </li>
                     <li class="active-pro">
                         <a href="./upgrade.html">
                             <i class="now-ui-icons arrows-1_cloud-download-93"></i>
