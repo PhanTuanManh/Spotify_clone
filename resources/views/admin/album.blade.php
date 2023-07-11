@@ -70,7 +70,7 @@
                                 @foreach ($albums as $album)
                                     <tr>
                                         <td>{{ $album->Album_id }}</td>
-                                        <td>{{ $album->Name }}</td>
+                                        <td>{{ Str::limit($album->Name, 30) }}</td>
                                         <td>{{ $album->Release_date }}</td>
                                         <td>
                                             @if ($album->Thumbnail)

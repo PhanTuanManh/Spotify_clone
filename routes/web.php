@@ -12,6 +12,7 @@ use App\Http\Controllers\SongController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SongAlbumController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\TrackController;
 
 
@@ -131,6 +132,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/track-edit/{id}', 'TrackController@edit')->name('track.edit')->middleware('checklogin');
         Route::put('/track-update/{id}', 'TrackController@update')->name('track.update')->middleware('checklogin');
         Route::delete('/track-delete/{id}', 'TrackController@delete')->name('track.delete')->middleware('checklogin');
+
+
+        Route::post('/like-song/{songId}', [LikeController::class, 'likeSong'])->name('like-song');
+
         // Route::get('/product/index', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // Route::get('/product/create', [ProductController::class, 'create'])->name('products.create')->middleware('checklogin::class');;
         // Route::get('/product/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy')->middleware('checklogin::class');;

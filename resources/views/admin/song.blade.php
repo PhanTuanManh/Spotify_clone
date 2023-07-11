@@ -90,7 +90,7 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="text-primary">
-                                <th>Song ID</th>
+                                {{-- <th>Song ID</th> --}}
                                 <th>Name</th>
                                 <th>Genre</th>
                                 <th>Lyrics</th>
@@ -103,7 +103,7 @@
                             <tbody>
                                 @foreach ($songs as $song)
                                     <tr>
-                                        <td>{{ $song->Song_id }}</td>
+                                        {{-- <td>{{ $song->Song_id }}</td> --}}
                                         <td>{{ $song->Name }}</td>
                                         <td>{{ $song->genre->Name }}</td>
                                         <td>{{ Str::limit($song->Lyrics, 50) }}</td>
@@ -126,7 +126,7 @@
                                                 No Audio
                                             @endif
                                         </td>
-                                        <td>{{ $song->Descriptions }}</td>
+                                        <td>{{ Str::limit($song->Descriptions, 20) }}</td>
                                         <td>
                                             <a href="{{ route('song.edit', ['id' => $song->Song_id]) }}"
                                                 class="btn btn-success">EDIT</a>

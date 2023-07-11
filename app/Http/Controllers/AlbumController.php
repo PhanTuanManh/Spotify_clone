@@ -105,7 +105,6 @@ class AlbumController extends Controller
 
         $album->delete();
 
-        return redirect()->route('admin.album')
-            ->with('success', 'Album deleted successfully!');
+        return redirect('/album')->with('success', 'Album deleted successfully!');
     }
 }

@@ -1,18 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Category;
-use App\Models\Product;
+
+use App\Models\Genre;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index() 
+    public function index()
     {
-        $categories = Category::all();
-        $products = Product::all();
+        $genres = Genre::with('songs.artists')->get();
 
-        return view('home.index')->with('products', $products);
-        
+        return view('home.index', compact('genres'));
     }
 }

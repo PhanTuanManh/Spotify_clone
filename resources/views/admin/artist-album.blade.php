@@ -67,7 +67,7 @@
                                 @foreach ($albumArtists as $albumArtist)
                                     <tr>
                                         <td>{{ $albumArtist->artist->Name }}</td>
-                                        <td>{{ $albumArtist->album->Name }}</td>
+                                        <td>{{ Str::limit($albumArtist->album->Name, 30) }}</td>
                                         <td>
                                             <form
                                                 action="{{ route('artist-album.delete', ['albumId' => $albumArtist->album_id, 'artistId' => $albumArtist->artist_id]) }}"

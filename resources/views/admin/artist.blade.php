@@ -58,7 +58,7 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="text-primary">
-                                <th>Artist ID</th>
+                                {{-- <th>Artist ID</th> --}}
                                 <th>Name</th>
                                 <th>Descriptions</th>
                                 <th>Avatar</th>
@@ -68,9 +68,9 @@
                             <tbody>
                                 @foreach ($artists as $artist)
                                     <tr>
-                                        <td>{{ $artist->Artist_id }}</td>
+                                        {{-- <td>{{ $artist->Artist_id }}</td> --}}
                                         <td>{{ $artist->Name }}</td>
-                                        <td>{{ $artist->Descriptions }}</td>
+                                        <td>{{ Str::limit($artist->Descriptions, 50) }}</td>
                                         <td>
                                             @if ($artist->Avatar)
                                                 <img src="{{ asset('avatars/' . $artist->Avatar) }}"

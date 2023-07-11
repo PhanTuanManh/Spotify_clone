@@ -74,7 +74,7 @@
                                 @foreach ($albumSongs as $albumSong)
                                     <tr>
                                         <td>{{ $albumSong->song->Name }}</td>
-                                        <td>{{ $albumSong->album->Name }}</td>
+                                        <td>{{ Str::limit($albumSong->album->Name, 30) }}</td>
                                         {{-- <td>
                                             <a href="{{ route('song-album.edit', ['id' => $albumSong->song_id]) }}"
                                                 class="btn btn-success">EDIT</a>
