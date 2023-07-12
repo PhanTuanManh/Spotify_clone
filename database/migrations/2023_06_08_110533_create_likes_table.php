@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('likes', function (Blueprint $table) {
+            $table->id();
             $table->integer('User_id')->unsigned();
             $table->integer('Song_id')->unsigned();
-            $table->primary(['User_id', 'Song_id']);
             $table->foreign('User_id')->references('User_id')->on('users')->onDelete('cascade');
             $table->foreign('Song_id')->references('Song_id')->on('songs')->onDelete('cascade');
             $table->timestamps();

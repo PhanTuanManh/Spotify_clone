@@ -46,6 +46,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
      * Home Routes
      */
     Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('/genre/{name}', 'PopController@show')->name('genre.show');
 
     Route::group(['middleware' => ['guest']], function () {
         /**
@@ -134,7 +135,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::delete('/track-delete/{id}', 'TrackController@delete')->name('track.delete')->middleware('checklogin');
 
 
-        Route::post('/like-song/{songId}', [LikeController::class, 'likeSong'])->name('like-song');
+        Route::post('/toggle-like/{songId}', 'LikesController@toggleLike')->middleware('web');
 
         // Route::get('/product/index', [ProductController::class, 'index'])->name('products.index')->middleware('checklogin::class');
         // Route::get('/product/create', [ProductController::class, 'create'])->name('products.create')->middleware('checklogin::class');;

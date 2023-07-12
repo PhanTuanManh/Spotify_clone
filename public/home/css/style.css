@@ -357,6 +357,19 @@ fa-home {
 	padding-top: 10px;
 }
 
+.spotify-playlists>.description>p>a {
+	display: inline-block;
+	float: right;
+	/* -webkit-tap-highlight-color: transparent; */
+	font-size: 12px;
+	font-weight: 600;
+	color: #ccc;
+	padding-top: 10px;
+	text-decoration: none;
+	/* Gạch chân cho liên kết */
+	cursor: pointer;
+}
+
 .spotify-playlists>.description>p:hover {
 	cursor: pointer;
 	text-decoration: underline;
@@ -368,6 +381,15 @@ fa-home {
 	display: flex;
 	gap: 20px;
 	overflow: hidden;
+}
+
+.spotify-playlists .list .row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	overflow: hidden;
+	justify-content: space-between;
+
 }
 
 .spotify-playlists .list .item {
@@ -389,6 +411,25 @@ fa-home {
 	width: 100%;
 	border-radius: 6px;
 	margin-bottom: 10px;
+}
+
+.artist-img {
+	width: 100%;
+	padding-top: 100%;
+	/* Tạo chiều cao bằng với chiều rộng */
+	position: relative;
+	overflow: hidden;
+	border-radius: 50%;
+
+}
+
+.artist-img img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
 }
 
 .spotify-playlists .list .item .play {
@@ -498,6 +539,11 @@ i {
 
 i:hover {
 	color: var(--primary-color);
+}
+
+#repeat-icon {
+	color: var(--secondary-color);
+
 }
 
 .song-bar {
@@ -707,4 +753,8 @@ audio::-webkit-media-controls {
 
 #volume-icon {
 	min-width: 16px;
+}
+
+.hidden-audio-controls audio {
+	display: none;
 }

@@ -17,7 +17,7 @@ class Likes extends Model
         'Song_id'
     ];
 
-    protected $primaryKey = null;
+    protected $primaryKey = 'id';
 
     public function user()
     {

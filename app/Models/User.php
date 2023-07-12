@@ -75,4 +75,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Subcription::class, 'Plan_id');
     }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Songs::class, 'likes', 'User_id', 'User_id');
+    }
 }

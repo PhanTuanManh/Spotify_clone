@@ -9,13 +9,15 @@
         href="https://th.bing.com/th/id/R.2ebc6c77ba84d7194d4a8f6a7334571e?rik=2ffoY4RHjXWJ2w&pid=ImgRaw&r=0">
     <title>Spotify clone</title>
     <link rel="stylesheet" href="  {{ asset('home/css/style.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body>
 
     <div class="sidebar">
         <div class="logo">
-            <a href="#">
+            <a href="/">
                 <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
                     alt="Logo" />
             </a>
@@ -128,8 +130,8 @@
                     <li class="divider">|</li>
                     </ul>
                     <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                            <a href="#">Sign Up</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                          </li> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <a href="#">Sign Up</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </li> -->
                     <!-- <button type="button" class="button1">Sign up</button> -->
                     <button class="user-container" id="myButton">
                         <div class="user-fame" style="width: 28px; height:28px; inset-inline-start: 0px;">
@@ -178,11 +180,36 @@
 
         </div>
 
+        <div class="spotify-playlists">
+            <div class="description">
+                <h2>Recommended for today</h2>
+            </div>
+            <div class="list">
+                @foreach (\App\Models\Songs::inRandomOrder()->take(6)->get() as $song)
+                    <div class="item play-item" onclick="updatePlayer(event)">
+                        <img src="{{ asset('song_images/' . $song->Song_IMG) }}" />
+                        <div class="play">
+                            <span class="fa fa-play"></span>
+                        </div>
+                        <h4>{{ $song->Name }}</h4>
+                        @if ($song->artists->isNotEmpty())
+                            <p>{{ $song->artists->first()->Name }}</p>
+                        @endif
+                        <audio id="audio-player" controls style="display: none;">
+                            <source src="{{ asset('song_audio/' . $song->Song_Audio) }}" type="audio/mpeg">
+                        </audio>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+
+
         @foreach ($genres as $genre)
             <div class="spotify-playlists">
                 <div class="description">
                     <h2>{{ $genre->Name }}</h2>
-                    <p>Show all</p>
+                    <p><a href="{{ route('genre.show', ['name' => $genre->Name]) }}">Show all</a></p>
                 </div>
                 <div class="list">
                     @foreach ($genre->songs()->inRandomOrder()->take(6)->get() as $song)
@@ -195,14 +222,39 @@
                             @if ($song->artists->isNotEmpty())
                                 <p>{{ $song->artists->first()->Name }}</p>
                             @endif
-                            <audio controls style="display: none;">
+                            <audio id="audio-player" controls style="display: none;">
                                 <source src="{{ asset('song_audio/' . $song->Song_Audio) }}" type="audio/mpeg">
                             </audio>
+
                         </div>
                     @endforeach
                 </div>
             </div>
         @endforeach
+
+
+        <div class="spotify-playlists">
+            <div class="description">
+                <h2>Suggested artists</h2>
+                <p>Show all</p>
+            </div>
+            <div class="list">
+                @foreach ($artists as $artist)
+                    <div class="item" onclick="playArtistSong({{ $artist->Artist_id }})">
+                        <div class="artist-img">
+                            <img src="{{ asset('avatars/' . $artist->Avatar) }}" />
+                        </div>
+                        <div class="play">
+                            <span class="fa fa-play"></span>
+                        </div>
+                        <h4>{{ $artist->Name }}</h4>
+                        <p>Artist</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+
 
 
         <hr>
@@ -223,7 +275,14 @@
                 </div>
             </div>
             <div class="icons">
-                <i class="far fa-heart"></i>
+                @auth
+                    <i id="heart-{{ $song->id }}"
+                        class="{{ $song->likes->where('User_id', auth()->user()->id)->contains('Song_id', $song->id) ? 'fas fa-heart' : 'far fa-heart' }}"
+                        onclick="toggleLike({{ $song->id }})"></i>
+                @endauth
+                @guest
+                    <i class="far fa-heart" onclick="window.location.href = '/login'"></i>
+                @endguest
                 <i class="fas fa-compress"></i>
             </div>
         </div>
@@ -231,9 +290,10 @@
             <div class="control-buttons">
                 <i class="fas fa-random" title="random" onclick="randomTrack()"></i>
                 <i class="fas fa-step-backward" onclick="prevTrack()"></i>
-                <i class="play-pause fas fa-play" onclick="playpauseTrack()" style="line-height: 0.9;"></i>
+                <i class="play-pause fas fa-play" title="play" onclick="playpauseTrack()"
+                    style="line-height: 0.9;"></i>
                 <i class="fas fa-step-forward" onclick="nextTrack()"></i>
-                <i class="fas fa-undo-alt" title="repeat" onclick="repeatTrack()"></i>
+                <i id="repeat-icon" class="fas fa-undo-alt" title="repeat" onclick="repeatTrack()"></i>
             </div>
             <div class="progress-container">
                 <span class="current-time">00:00</span>
@@ -259,6 +319,28 @@
 
     <script src="https://kit.fontawesome.com/23cecef777.js" crossorigin="anonymous"></script>
     <script src="{{ asset('home/js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function toggleLike(songId) {
+            var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
+
+            axios.post(`/toggle-like/${songId}`)
+                .then(response => {
+                    if (response.data.isLiked) {
+                        // Nếu đã like, chuyển đổi thành fas fa-heart
+                        document.getElementById(`heart-${songId}`).classList.replace('far', 'fas');
+                    } else {
+                        // Nếu đã unlike, chuyển đổi thành far fa-heart
+                        document.getElementById(`heart-${songId}`).classList.replace('fas', 'far');
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    </script>
+
 </body>
 
 </html>

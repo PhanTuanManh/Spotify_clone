@@ -20,7 +20,7 @@ class Songs extends Model
 
     public function likes()
     {
-        return $this->belongsToMany(Songs::class, 'likes', 'User_id', 'Song_id');
+        return $this->belongsToMany(Songs::class, 'likes', 'Song_id', 'Song_id');
     }
 
     public function playlists()

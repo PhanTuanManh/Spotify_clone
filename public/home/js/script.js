@@ -147,6 +147,7 @@ function pauseCurrentAudio() {
   }
 }
 
+
 // Hàm định dạng thời gian
 function formatTime(time) {
   var minutes = Math.floor(time / 60);
@@ -201,36 +202,49 @@ function adjustVolume() {
 var volumeSlider = document.getElementById('volume-slider');
 
 
+//
+
+
+
+
 
 // 
 // 
-const likeButton = document.querySelector('.far fa-heart');
+src = "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
 
-likeButton.addEventListener('click', function () {
-  const songId = 1; // Replace with the corresponding song ID
-
-  // Send an AJAX request to save or remove the like
-  fetch(`/like-song/${songId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': '{{ csrf_token() }}', // Replace with the corresponding CSRF token
-    },
-  })
+function toggleLike(songId) {
+  axios.post(`/toggle-like/${songId}`)
     .then(response => {
-      if (response.ok) {
-        // Toggle the like status and icon
-        likeButton.classList.toggle('fas');
-        likeButton.classList.toggle('far');
-        likeButton.classList.toggle('fa-heart');
-        likeButton.classList.toggle('fa-heart');
-
-        console.log('Like status updated successfully!');
+      if (response.data.isLiked) {
+        // Nếu đã like, chuyển đổi thành fas fa-heart
+        document.getElementById(`heart-${songId}`).classList.replace('far', 'fas');
       } else {
-        console.error('Failed to update like status.');
+        // Nếu đã unlike, chuyển đổi thành far fa-heart
+        document.getElementById(`heart-${songId}`).classList.replace('fas', 'far');
       }
     })
     .catch(error => {
-      console.error('An error occurred:', error);
+      console.log(error);
     });
-});
+}
+
+
+
+var repeatIcon = document.getElementById('repeat-icon');
+var audio = document.getElementById('audio-player'); // Thay thế 'audio-player' bằng ID của thẻ audio trong mã HTML
+
+function repeatTrack() {
+  if (audio.loop) {
+    audio.loop = false; // Tắt chế độ lặp lại
+    repeatIcon.style.color = '#999'; // Đặt màu về mặc định
+  } else {
+    audio.loop = true; // Bật chế độ lặp lại
+    repeatIcon.style.color = '#1db954'; // Đặt màu mới
+  }
+}
+
+
+
+
+
+
