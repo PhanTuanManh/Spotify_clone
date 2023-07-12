@@ -30,6 +30,11 @@ class PopController extends Controller
                 'home.edm',
                 compact('songs', 'genre')
             );
+        } elseif ($name === 'V-Pop') {
+            return view(
+                'home.vpop',
+                compact('songs', 'genre')
+            );
         }
     }
 }

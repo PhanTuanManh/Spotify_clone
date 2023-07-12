@@ -392,6 +392,7 @@ fa-home {
 
 }
 
+
 .spotify-playlists .list .item {
 	min-width: 140px;
 	width: 160px;
@@ -420,6 +421,7 @@ fa-home {
 	position: relative;
 	overflow: hidden;
 	border-radius: 50%;
+	margin-bottom: 10px;
 
 }
 
@@ -757,4 +759,45 @@ audio::-webkit-media-controls {
 
 .hidden-audio-controls audio {
 	display: none;
+}
+
+.container-genre h1 {
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent;
+	margin: 16px;
+	font-size: 1.5rem;
+	color: #fff;
+	font-weight: 700;
+	font-family: var(--font-family, CircularSpTitle, CircularSpTitle-Tall, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva, var(--fallback-fonts, sans-serif));
+}
+
+.container-genre {
+	border: none;
+	border-radius: 8px;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	background-color: rgb(225, 51, 0);
+	max-width: 200px;
+	max-height: 200px;
+}
+
+.genre-img {
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	margin: 0 auto;
+
+}
+
+.genre-img img {
+	width: 55%;
+	height: auto;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	-webkit-transform: rotate(25deg) translate(18%, -2%);
+	transform: rotate(25deg) translate(18%, -2%);
+	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
 }

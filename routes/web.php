@@ -46,6 +46,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
      * Home Routes
      */
     Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('/search', 'SearchController@index')->name('search.index');
     Route::get('/genre/{name}', 'PopController@show')->name('genre.show');
 
     Route::group(['middleware' => ['guest']], function () {
