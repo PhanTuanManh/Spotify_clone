@@ -28,6 +28,19 @@
                             <textarea class="form-control" id="lyrics" name="lyrics" rows="4">{{ old('lyrics') }}</textarea>
                         </div>
                         <div class="form-group mt-4">
+                            <label for="song_artist" class="col-form-label">Artist:</label>
+                            <select class="form-control" id="song_artist" name="artist_id[]" multiple>
+                                <option value="">Select Artist</option>
+                                <!-- Thêm option trống để người dùng có thể chọn -->
+                                @isset($artists)
+                                    @foreach ($artists as $artist)
+                                        <option value="{{ $artist->Artist_id }}">{{ $artist->Name }}</option>
+                                    @endforeach
+                                @endisset
+                            </select>
+                        </div>
+
+                        <div class="form-group mt-4">
                             <label for="song_img" class="col-form-label">Song Image:</label>
                             <input type="file" class="form-control-file" id="song_img" name="song_img">
                         </div>
@@ -62,9 +75,6 @@
                             </select>
                         </div>
 
-
-
-
                         <!-- ... -->
                         <!-- Add other song-related fields here -->
 
@@ -74,6 +84,7 @@
                         </div>
                     </form>
                 </div>
+
 
             </div>
         </div>
@@ -90,61 +101,80 @@
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="text-primary">
-                                {{-- <th>Song ID</th> --}}
                                 <th>Name</th>
                                 <th>Genre</th>
                                 <th>Lyrics</th>
                                 <th>Song Image</th>
                                 <th>Song Audio</th>
                                 <th>Descriptions</th>
+                                <th>Artist</th> <!-- Thêm cột Artist -->
                                 <th>EDIT</th>
                                 <th>DELETE</th>
                             </thead>
                             <tbody>
-                                @foreach ($songs as $song)
-                                    <tr>
-                                        {{-- <td>{{ $song->Song_id }}</td> --}}
-                                        <td>{{ $song->Name }}</td>
-                                        <td>{{ $song->genre->Name }}</td>
-                                        <td>{{ Str::limit($song->Lyrics, 50) }}</td>
-                                        <td>
-                                            @if ($song->Song_IMG)
-                                                <img src="{{ asset('song_images/' . $song->Song_IMG) }}"
-                                                    alt="{{ $song->Name }}" width="50">
-                                            @else
-                                                No Image
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($song->Song_Audio)
-                                                <audio controls>
-                                                    <source src="{{ asset('song_audio/' . $song->Song_Audio) }}"
-                                                        type="audio/mpeg">
-                                                    Your browser does not support the audio element.
-                                                </audio>
-                                            @else
-                                                No Audio
-                                            @endif
-                                        </td>
-                                        <td>{{ Str::limit($song->Descriptions, 20) }}</td>
-                                        <td>
-                                            <a href="{{ route('song.edit', ['id' => $song->Song_id]) }}"
-                                                class="btn btn-success">EDIT</a>
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('song.delete', ['id' => $song->Song_id]) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">DELETE</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                @if ($users)
+                                    @foreach ($users as $user)
+                                        // ...
+                                        <tr>
+                                            <td>{{ $song->Name }}</td>
+                                            <td>{{ $song->genre->Name }}</td>
+                                            <td>{{ Str::limit($song->Lyrics, 50) }}</td>
+                                            <td>
+                                                @if ($song->Song_IMG)
+                                                    <img src="{{ asset('song_images/' . $song->Song_IMG) }}"
+                                                        alt="{{ $song->Name }}" width="50">
+                                                @else
+                                                    No Image
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($song->Song_IMG)
+                                                    <img src="{{ asset('song_images/' . $song->Song_IMG) }}"
+                                                        alt="{{ $song->Name }}" width="50">
+                                                @else
+                                                    No Image
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($song->Song_Audio)
+                                                    <audio controls>
+                                                        <source src="{{ asset('song_audio/' . $song->Song_Audio) }}"
+                                                            type="audio/mpeg">
+                                                        Your browser does not support the audio element.
+                                                    </audio>
+                                                @else
+                                                    No Audio
+                                                @endif
+                                            </td>
+                                            <td>{{ Str::limit($song->Descriptions, 20) }}</td>
+                                            <td>
+                                                @foreach ($song->artists as $artist)
+                                                    <!-- Hiển thị danh sách nghệ sĩ -->
+                                                    {{ $artist->Name }},
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                <a href="{{ route('song.edit', ['id' => $song->Song_id]) }}"
+                                                    class="btn btn-success">EDIT</a>
+                                            </td>
+                                            <td>
+                                                <form action="{{ route('song.delete', ['id' => $song->Song_id]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+
+
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

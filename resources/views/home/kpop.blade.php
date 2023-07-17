@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png"
         href="https://th.bing.com/th/id/R.2ebc6c77ba84d7194d4a8f6a7334571e?rik=2ffoY4RHjXWJ2w&pid=ImgRaw&r=0">
     <title>Spotify clone</title>
-    <link rel="stylesheet" href="  {{ asset('home/css/style-search.css') }}">
+    <link rel="stylesheet" href="  {{ asset('home/css/style-genre.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
@@ -53,7 +53,6 @@
                 </li>
             </ul>
         </div>
-
         <div class="navigation">
             <ul>
                 <li>
@@ -87,12 +86,10 @@
     <div class="main-container">
         <div class="topbar">
             <div class="prev-next-buttons">
-                <div class="search-container">
-                    <input type="text" name="search" placeholder="Search..." class="search-input">
-                    <a href="#" class="search-btn">
-                        <i class="fas fa-search"></i>
-                    </a>
-                </div>
+                <button type="button" class="fa fas fa-chevron-left"></button>
+                <button type="button" class="fa fas fa-chevron-right"></button>
+
+
             </div>
             @guest
                 <div class="navbar">
@@ -134,8 +131,8 @@
                     <li class="divider">|</li>
                     </ul>
                     <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Sign Up</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </li> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Sign Up</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </li> -->
                     <!-- <button type="button" class="button1">Sign up</button> -->
                     <button class="user-container" id="myButton">
                         <div class="user-fame" style="width: 28px; height: 28px; inset-inline-start: 0px;">
@@ -184,6 +181,7 @@
                 <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
             </div>
         @endauth
+
         @guest
             <div class="text-end">
                 <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2">Login</a>
@@ -194,41 +192,42 @@
 
         </div>
 
-
         <div class="spotify-playlists">
             <div class="description">
-                <h2>Genres</h2>
+                <h2>{{ $genre->Name }}</h2>
             </div>
             <div class="list">
-                @foreach ($genres->chunk(5) as $genreChunk)
-                    <div class="row">
-                        @foreach ($genreChunk as $genre)
-                            <div class="item play-item">
-                                <div class="container-genre"
-                                    style="background-color: {{ sprintf('#%06X', mt_rand(0, 0xffffff)) }};">
-                                    <a href="{{ route('genre.show', ['name' => $genre->Name]) }}">
-                                        <h1>{{ $genre->Name }}</h1>
-                                        <div class="genre-img">
-                                            @foreach ($genre->songs()->inRandomOrder()->take(1)->get() as $song)
-                                                <img src="{{ asset('song_images/' . $song->Song_IMG) }}"
-                                                    alt="">
-                                            @endforeach
-                                        </div>
-                                </div>
+                <div class="row">
+                    @foreach ($songs as $song)
+                        <div class="item play-item" onclick="updatePlayer(event)">
+                            <img src="{{ asset('song_images/' . $song->Song_IMG) }}" />
+                            <div class="play">
+                                <span class="fa fa-play"></span>
                             </div>
-                        @endforeach
-                    </div>
-                @endforeach
+                            <h4>{{ $song->Name }}</h4>
+                            @if ($song->artists->isNotEmpty())
+                                <p>{{ Str::limit(implode(', ', $song->artists->pluck('Name')->toArray()), 50) }}</p>
+                            @endif
+                            <audio id="audio-player" controls style="display: none;">
+                                <source src="{{ asset('song_audio/' . $song->Song_Audio) }}" type="audio/mpeg">
+                            </audio>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
 
 
 
 
+    </div>
+    </div>
 
 
 
-        <hr>
+
+
+    <hr>
     </div>
 
     <div class="music-player">
@@ -246,7 +245,14 @@
                 </div>
             </div>
             <div class="icons">
-                <i class="far fa-heart"></i>
+                @auth
+                    <i id="heart-{{ $song->id }}"
+                        class="{{ $song->likes->where('User_id', auth()->user()->id)->contains('Song_id', $song->id) ? 'fas fa-heart' : 'far fa-heart' }}"
+                        onclick="toggleLike({{ $song->id }})"></i>
+                @endauth
+                @guest
+                    <i class="far fa-heart" onclick="window.location.href = '/login'"></i>
+                @endguest
                 <i class="fas fa-compress"></i>
             </div>
         </div>

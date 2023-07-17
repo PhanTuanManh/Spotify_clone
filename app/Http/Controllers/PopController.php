@@ -35,6 +35,11 @@ class PopController extends Controller
                 'home.vpop',
                 compact('songs', 'genre')
             );
+        } elseif ($name === 'K-Pop') {
+            return view(
+                'home.kpop',
+                compact('songs', 'genre')
+            );
         }
     }
 }

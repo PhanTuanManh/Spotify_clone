@@ -28,17 +28,39 @@
                             <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
                         </div>
                         <div class="form-group mt-4">
-                            <label for="album_id" class="col-form-label">Album:</label>
-                            <select class="form-control" id="album_id" name="album_id">
-                                <option value="">Select Album</option>
-                                <!-- Thêm option trống để người dùng có thể chọn -->
+                            <label class="col-form-label">Album:</label>
+                            <div class="checkbox-list">
                                 @isset($albums)
                                     @foreach ($albums as $album)
-                                        <option value="{{ $album->Album_id }}">{{ $album->Name }}</option>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="album_id[]"
+                                                value="{{ $album->Album_id }}" id="album{{ $album->Album_id }}"
+                                                @if (in_array($album->Album_id, old('album_id', []))) checked @endif>
+                                            <label class="form-check-label" for="album{{ $album->Album_id }}">
+                                                {{ $album->Name }}
+                                            </label>
+                                        </div>
                                     @endforeach
                                 @endisset
-                            </select>
+                            </div>
                         </div>
+
+                        <!-- Include the following script -->
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                // Get all checkboxes
+                                var checkboxes = document.querySelectorAll('.form-check-input');
+
+                                checkboxes.forEach(function(checkbox) {
+                                    checkbox.addEventListener('change', function() {
+                                        // Toggle the 'checked' attribute of the parent label when the checkbox is clicked
+                                        this.parentElement.classList.toggle('checked');
+                                    });
+                                });
+                            });
+                        </script>
+
+
                         <!-- Add other track-related fields here -->
 
                         <div class="modal-footer">
@@ -46,6 +68,8 @@
                             <button type="submit" class="btn btn-primary">Add Track</button>
                         </div>
                     </form>
+
+
                 </div>
 
             </div>

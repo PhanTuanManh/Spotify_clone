@@ -80,6 +80,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
         Route::get('/admin', 'DashboardController@index')->middleware('checklogin');
 
+        Route::get('/profile/{id}', 'ProfileController@index')->name('profile.index')->middleware('auth');
+        Route::get('/profile-edit/{id}', 'ProfileController@edit')->name('profile.edit')->middleware('auth');
+        Route::put('/profile-update/{id}', 'ProfileController@update')->name('profile.update')->middleware('auth');
+
         Route::get('/user', [UserController::class, 'index'])->middleware('checklogin::class');
         Route::get('/user-edit/{id}', 'UserController@edit')->middleware('checklogin::class');
         Route::put('/user-update/{id}', 'UserController@update')->name('user.update')->middleware('checklogin');

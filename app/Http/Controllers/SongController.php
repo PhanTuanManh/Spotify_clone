@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artists;
 use Illuminate\Http\Request;
 use App\Models\Songs;
+use App\Models\SongArtist;
 use App\Models\Genre;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +16,8 @@ class SongController extends Controller
     {
         $songs = Songs::all();
         $genres = Genre::all();
-        return view('admin.song', compact('songs', 'genres'));
+        $artists = Artists::all();
+        return view('admin.song', compact('songs', 'genres', 'artists'));
     }
 
 
@@ -34,7 +37,10 @@ class SongController extends Controller
                 'song_img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'song_audio' => 'required|mimes:audio/mpeg,mpga,mp3,wav',
                 'descriptions' => 'required|string',
-                'genre_id' => 'required|exists:genres,Genre_id'
+                'genre_id' => 'required|exists:genres,Genre_id',
+                'artist_id' => 'required|array',
+                'artist_id.*' => 'exists:artists,Artist_id',
+
             ]);
 
             if ($validator->fails()) {
@@ -68,10 +74,25 @@ class SongController extends Controller
             $newSong->Genre_id = $request->genre_id;
             $newSong->save();
 
+            $newSong->artists()->attach($request->Artist_id); // Lưu danh sách nghệ sĩ vào bảng song_artist
+
+            $artists = $request->input('artist_id');
+            if (!empty($artists)) {
+                foreach ($artists as $artistId) {
+                    $songArtist = new SongArtist();
+                    $songArtist->song_id = $newSong->Song_id;
+                    $songArtist->artist_id = $artistId;
+                    $songArtist->save();
+                }
+            }
+
             $genres = Genre::all();
             return redirect('/song')->with(compact('genres'))->with('success', 'Song added successfully!');
         }
     }
+
+
+
 
     public function edit($id)
     {
@@ -90,7 +111,9 @@ class SongController extends Controller
             'song_img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'song_audio' => 'nullable|mimes:audio/mpeg,mpga,mp3,wav',
             'descriptions' => 'required|string',
-            'genre_id' => 'required|exists:genres,Genre_id'
+            'genre_id' => 'required|exists:genres,Genre_id',
+            'artist_id' => 'required|array',
+            'artist_id.*' => 'exists:artists,Artist_id',
         ]);
 
         if ($validator->fails()) {
@@ -106,21 +129,27 @@ class SongController extends Controller
 
         // Handle file upload for song image
         if ($request->hasFile('song_img')) {
-            $songImg = $request->file('song_img');
-            $songImgName = time() . '_' . $songImg->getClientOriginalName();
-            $songImg->move(public_path('song_images'), $songImgName);
-            $song->Song_IMG = $songImgName;
+            $file = $request->file('song_img');
+            $path = public_path('song_images');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $song->Song_IMG = $fileName;
         }
 
         // Handle file upload for song audio
         if ($request->hasFile('song_audio')) {
-            $songAudio = $request->file('song_audio');
-            $songAudioName = time() . '_' . $songAudio->getClientOriginalName();
-            $songAudio->move(public_path('song_audio'), $songAudioName);
-            $song->Song_Audio = $songAudioName;
+            $file = $request->file('song_audio');
+            $path = public_path('song_audio');
+            $fileNameAudio = time() . '_' . $file->getClientOriginalName();
+            $file->move($path, $fileNameAudio);
+            $song->Song_Audio = $fileNameAudio;
         }
 
         $song->save();
+
+        // Sync the artists
+        $artists = $request->input('artist_id');
+        $song->artists()->sync($artists);
 
         return redirect('/song')->with('success', 'Song updated successfully!');
     }

@@ -29,7 +29,8 @@ class TrackController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'album_id' => 'required|exists:albums,Album_id',
+            'album_id' => 'required|array', // Trường album_id phải là một mảng
+            'album_id.*' => 'exists:albums,Album_id', // Kiểm tra từng phần tử của mảng album_id có tồn tại trong bảng albums
         ]);
 
         if ($validator->fails()) {
@@ -46,14 +47,18 @@ class TrackController extends Controller
             $file->move($path, $fileName);
         }
 
+        $albumIds = $request->input('album_id'); // Lấy giá trị của trường album_id trong một mảng
+        $albumIdsString = implode(',', $albumIds); // Chuyển đổi mảng albumIds thành chuỗi được phân tách bằng dấu phẩy
+
         $track = new Tracks();
         $track->Name = $request->input('name');
         $track->Thumbnail = $fileName;
-        $track->Album_id = $request->input('album_id');
+        $track->Album_id = $albumIdsString; // Lưu chuỗi albumIdsString vào trường Album_id
         $track->save();
 
         return redirect('/track')->with('success', 'Track added successfully');
     }
+
 
 
     public function update(Request $request, $id)
