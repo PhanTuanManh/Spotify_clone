@@ -26,14 +26,14 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a style="color:#ffffff" href="{{ url('/') }}">
+                    <a href="{{ url('/') }}">
                         <span class="fa fa-home"></span>
                         <span>Home</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="/search">
+                    <a style="color:#ffffff" href="/search">
                         <span class="fa fa-search"></span>
                         <span>Search</span>
                     </a>
@@ -134,8 +134,8 @@
                     <li class="divider">|</li>
                     </ul>
                     <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Sign Up</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </li> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Sign Up</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </li> -->
                     <!-- <button type="button" class="button1">Sign up</button> -->
                     <button class="user-container" id="myButton">
                         <div class="user-fame" style="width: 28px; height: 28px; inset-inline-start: 0px;">
@@ -178,12 +178,6 @@
             @endauth
         </div>
 
-        @auth
-            {{ auth()->user()->name }}
-            <div class="text-end">
-                <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-2">Logout</a>
-            </div>
-        @endauth
         @guest
             <div class="text-end">
                 <a href="{{ route('login.perform') }}" class="btn btn-outline-light me-2">Login</a>
