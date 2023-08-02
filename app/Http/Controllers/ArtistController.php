@@ -13,7 +13,7 @@ class ArtistController extends Controller
         return view('admin.artist', ['artists' => $artists]);
     }
 
-    public function store(Request $request)
+    public function xxxxxxxxxxxxxxxxxx  (Request $request)
     {
         // Validate form data
         $validatedData = $request->validate([
