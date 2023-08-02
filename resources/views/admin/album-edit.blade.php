@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Dashboard | Artist Edition
+    Dashboard | Album Edition
 @endsection
 
 @section('content')
@@ -26,6 +26,27 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ $album->Name }}">
                         </div>
+                        <!-- Other parts of your form... -->
+
+                        <div class="form-group mt-4">
+                            <label for="album_artist" class="col-form-label">Artist:</label>
+                            <select class="form-control" id="album_artist" name="artist_id[]" multiple>
+                                <option value="">Select Artist</option>
+                                @isset($artists)
+                                    @foreach ($artists as $artist)
+                                        <option value="{{ $artist->Artist_id }}"
+                                            {{ in_array($artist->Artist_id, $selectedArtists) ? 'selected' : '' }}>
+                                            {{ $artist->Name }}
+                                        </option>
+                                    @endforeach
+                                @endisset
+                            </select>
+                        </div>
+
+                        <!-- Other parts of your form... -->
+
+
+
                         <div class="form-group">
                             <label for="release_date" class="col-form-label">Release Date:</label>
                             <input type="date" class="form-control" id="release_date" name="release_date"
@@ -35,7 +56,7 @@
                             <label for="thumbnail">Thumbnail:</label>
                             <input type="file" name="thumbnail" id="thumbnail" class="form-control-file">
                             @if ($album->Thumbnail)
-                                <img src="{{ asset('thumbnails/' . $album->Thumbnail) }}" alt="{{ $album->Name }}"
+                                <img src="{{ asset('album_thumbnails/' . $album->Thumbnail) }}" alt="{{ $album->Name }}"
                                     width="100">
                             @endif
                         </div>
