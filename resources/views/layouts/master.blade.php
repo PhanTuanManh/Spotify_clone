@@ -41,7 +41,7 @@
 
 <body class="">
     <div class="wrapper ">
-        <div class="sidebar" data-color="orange">
+        <div class="sidebar" data-color="black">
             <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
@@ -179,13 +179,22 @@
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#pablo" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
                                     <i class="now-ui-icons users_single-02"></i>
                                     <p>
                                         <span class="d-lg-none d-md-block">Account</span>
                                     </p>
                                 </a>
+                                @auth
+                                    <div class="dropdown-menu dropdown-menu-right"
+                                        aria-labelledby="navbarDropdownMenuLink">
+                                        <a class="dropdown-item"
+                                            href="{{ route('profile.index', ['id' => auth()->user()->User_id]) }}">{{ auth()->user()->username }}</a>
+                                        <a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a>
+                                    </div>
+                                @endauth
                             </li>
                         </ul>
                     </div>

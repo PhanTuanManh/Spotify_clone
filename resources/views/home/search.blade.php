@@ -15,74 +15,7 @@
 
 <body>
 
-    <div class="sidebar">
-        <div class="logo">
-            <a href="/">
-                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
-                    alt="Logo" />
-            </a>
-        </div>
-
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="{{ url('/') }}">
-                        <span class="fa fa-home"></span>
-                        <span>Home</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a style="color:#ffffff" href="/search">
-                        <span class="fa fa-search"></span>
-                        <span>Search</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="fa fas fa-book"></span>
-                        <span>Your Library</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="fa fa-list"></span>
-                        <span>Categlory</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="{{ url('/404') }}">
-                        <span class="fa fas fa-plus-square"></span>
-                        <span>Create Playlist</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url('/404') }}">
-                        <span class="fa fas fa-heart"></span>
-                        <span>Liked Songs</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- <div class="policies">
-        <ul>
-          <li>
-            <a href="#">Cookies</a>
-          </li>
-          <li>
-            <a href="#">Privacy</a>
-          </li>
-        </ul>
-      </div> -->
-    </div>
+    @include('layouts-home.sidebar')
 
     <div class="main-container">
         <div class="topbar">
@@ -134,8 +67,8 @@
                     <li class="divider">|</li>
                     </ul>
                     <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Sign Up</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </li> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <a href="#">Sign Up</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </li> -->
                     <!-- <button type="button" class="button1">Sign up</button> -->
                     <button class="user-container" id="myButton">
                         <div class="user-fame" style="width: 28px; height: 28px; inset-inline-start: 0px;">
@@ -216,63 +149,10 @@
             </div>
         </div>
 
-
-
-
-
-
-
         <hr>
     </div>
 
-    <div class="music-player">
-        <div class="song-bar">
-            <div class="song-infos now-playing">
-                <div class="image-container song-art">
-                    <img src="{{ asset('image/product/1680927047_artworks-000682696024-t8xa2d-t500x500.jpg') }}"
-                        alt="" />
-                </div>
-                <div class="song-description">
-                    <p class="title track-name">
-                        Intentions
-                    </p>
-                    <p class="artist track-artist">JB</p>
-                </div>
-            </div>
-            <div class="icons">
-                <i class="far fa-heart"></i>
-                <i class="fas fa-compress"></i>
-            </div>
-        </div>
-        <div class="progress-controller">
-            <div class="control-buttons">
-                <i class="fas fa-random" title="random" onclick="randomTrack()"></i>
-                <i class="fas fa-step-backward" onclick="prevTrack()"></i>
-                <i class="play-pause fas fa-play" title="play" onclick="playpauseTrack()"
-                    style="line-height: 0.9;"></i>
-                <i class="fas fa-step-forward" onclick="nextTrack()"></i>
-                <i id="repeat-icon" class="fas fa-undo-alt" title="repeat" onclick="repeatTrack()"></i>
-            </div>
-            <div class="progress-container">
-                <span class="current-time">00:00</span>
-                <input type="range" min="0" max="1" step="0.01" value="0"
-                    class="progress-bar" onchange="seekTo()" onmousedown="startSeek()" onmouseup="endSeek()"
-                    name="" id="slider">
-                <span class="total-time">00:00</span>
-            </div>
-        </div>
-        <div class="other-features">
-            <i class="fas fa-list-ul"></i>
-            <i class="fas fa-desktop"></i>
-            <div class="volume-bar">
-                <i id="volume-icon" class="fas fa-volume-down"></i>
-                <input type="range" min="0" max="1" step="0.01" value="1"
-                    class="volume-slider progress-bar" onchange="adjustVolume()" id="volume-slider">
-            </div>
-
-
-        </div>
-    </div>
+    @include('layouts-home.musicplayer')
     </div>
 
     <script src="https://kit.fontawesome.com/23cecef777.js" crossorigin="anonymous"></script>

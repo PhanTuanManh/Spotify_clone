@@ -23,6 +23,18 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ old('name') }}">
                         </div>
+                        <div class="form-group mt-4">
+                            <label for="song_artist" class="col-form-label">Artist:</label>
+                            <select class="form-control" id="song_artist" name="artist_id[]" multiple>
+                                <option value="">Select Artist</option>
+                                <!-- Thêm option trống để người dùng có thể chọn -->
+                                @isset($artists)
+                                    @foreach ($artists as $artist)
+                                        <option value="{{ $artist->Artist_id }}">{{ $artist->Name }}</option>
+                                    @endforeach
+                                @endisset
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label for="release_date" class="col-form-label">Release Date:</label>
                             <input type="date" class="form-control" id="release_date" name="release_date"
@@ -61,6 +73,7 @@
                             <thead class="text-primary">
                                 <th>Album ID</th>
                                 <th>Name</th>
+                                <th>Artist</th>
                                 <th>Release Date</th>
                                 <th>Thumbnail</th>
                                 <th>EDIT</th>
@@ -71,6 +84,12 @@
                                     <tr>
                                         <td>{{ $album->Album_id }}</td>
                                         <td>{{ Str::limit($album->Name, 30) }}</td>
+                                        <td>
+                                            @foreach ($album->artists as $artist)
+                                                <!-- Hiển thị danh sách nghệ sĩ -->
+                                                {{ $artist->Name }},
+                                            @endforeach
+                                        </td>
                                         <td>{{ $album->Release_date }}</td>
                                         <td>
                                             @if ($album->Thumbnail)

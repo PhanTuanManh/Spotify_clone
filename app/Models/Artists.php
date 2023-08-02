@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Artists extends Model
 {
     use HasFactory;
-    protected $fillable = ['Name', 'Descriptions', 'Avatar'];
-
     protected $primaryKey = 'Artist_id';
+    protected $fillable = ['Name', 'Descriptions', 'Avatar'];
 
     public function artists()
     {

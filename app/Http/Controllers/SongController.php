@@ -98,7 +98,9 @@ class SongController extends Controller
     {
         $song = Songs::find($id);
         $genres = Genre::all();
-        return view('admin.song-edit', compact('song', 'genres'));
+        $artists = Artists::all();
+        $selectedArtists = $song->artists->pluck('Artist_id')->toArray();
+        return view('admin.song-edit', compact('song', 'genres', 'artists', 'selectedArtists'));
     }
 
     public function update(Request $request, $id)
