@@ -1,72 +1,3 @@
-    <div class="sidebar">
-        <div class="logo">
-            <a href="/">
-                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
-                    alt="Logo" />
-            </a>
-        </div>
-
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a style="color:#ffffff" href="{{ url('/') }}">
-                        <span class="fa fa-home"></span>
-                        <span>Home</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/search">
-                        <span class="fa fa-search"></span>
-                        <span>Search</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="fa fas fa-book"></span>
-                        <span>Your Library</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="fa fa-list"></span>
-                        <span>Categlory</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="{{ url('/404') }}">
-                        <span class="fa fas fa-plus-square"></span>
-                        <span>Create Playlist</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url('/404') }}">
-                        <span class="fa fas fa-heart"></span>
-                        <span>Liked Songs</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- <div class="policies">
-        <ul>
-          <li>
-            <a href="#">Cookies</a>
-          </li>
-          <li>
-            <a href="#">Privacy</a>
-          </li>
-        </ul>
-      </div> -->
-    </div>
-
     <style>
         * {
             padding: 0;
@@ -74,7 +5,6 @@
         }
 
         body {
-            background: linear-gradient(to bottom, #1f1f1f, #121212, #121212, #121212, #121212);
             font-family: 'Montserrat', sans-serif;
         }
 
@@ -182,4 +112,77 @@
         .sidebar .policies ul li a:focus {
             text-decoration: underline;
         }
+
+        li a.white !important {
+            color: #ffffff;
+        }
     </style>
+
+    <div class="sidebar">
+        <div class="logo">
+            <a href="/">
+                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png"
+                    alt="Logo" />
+            </a>
+        </div>
+
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="{{ url('/') }}" class="{{ '/' == request()->path() ? 'white' : '' }}">
+                        <span class="fa fa-home"></span>
+                        <span>Home</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/search" class="{{ '/search' == request()->path() ? 'white' : '' }}">
+                        <span class="fa fa-search"></span>
+                        <span>Search</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <span class="fa fas fa-book"></span>
+                        <span>Your Library</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="fa fa-list"></span>
+                        <span>Categlory</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="{{ url('/404') }}">
+                        <span class="fa fas fa-plus-square"></span>
+                        <span>Create Playlist</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('/404') }}">
+                        <span class="fa fas fa-heart"></span>
+                        <span>Liked Songs</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- <div class="policies">
+        <ul>
+          <li>
+            <a href="#">Cookies</a>
+          </li>
+          <li>
+            <a href="#">Privacy</a>
+          </li>
+        </ul>
+      </div> -->
+    </div>

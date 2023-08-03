@@ -292,17 +292,15 @@
     <div class="container-footer w-container">
         <div class="w-row">
             <div class="footer-column w-clearfix w-col w-col-4"><img
-                    src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/596d33f36607b12cfdaf8ad2_LogoWhite.png"
-                    alt="" width="40" class="failory-logo-image">
-                <h3 class="footer-failory-name">Failory</h3>
-                <p class="footer-description-failory">Lorem ipsum dolor sit amet.<br></p>
+                    src="https://logos-world.net/wp-content/uploads/2020/09/Spotify-Logo.png" alt="" width="250"
+                    class="failory-logo-image">
             </div>
             <div class="footer-column w-col w-col-8">
                 <div class="w-row">
                     <div class="w-col w-col-8">
                         <div class="w-row">
                             <div class="w-col w-col-7 w-col-small-6 w-col-tiny-7">
-                                <h3 class="footer-titles">Learn</h3>
+                                <h3 class="footer-titles">Company</h3>
                                 <p class="footer-links"><a href="" target="_blank"><span
                                             class="footer-link">Failed Startups<br></span></a><a href=""><span
                                             class="footer-link">Successful Startups<br></span></a><a
@@ -313,7 +311,7 @@
                                             class="footer-link">Podcast</span></a><strong><br></strong></p>
                             </div>
                             <div class="w-col w-col-5 w-col-small-6 w-col-tiny-5">
-                                <h3 class="footer-titles">Other</h3>
+                                <h3 class="footer-titles">Community</h3>
                                 <p class="footer-links"><a href=""><span class="footer-link">Sponsor
                                             Us!<br></span></a><a href=""><span class="footer-link">Open
                                             Startup<br></span></a><a href=""><span
@@ -333,15 +331,9 @@
                                 width="20" alt="Instagram icon"></a><a href="" target="_blank"
                             class="footer-social-network-icons w-inline-block"><img
                                 src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dbe42e1e6034fdaba46f6_Facebook%20Icon.svg"
-                                width="20" alt="Facebook Icon"></a><a href="" target="_blank"
-                            class="footer-social-network-icons w-inline-block"><img
-                                src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dc0002f2b676eb4ba0869_LinkedIn%20Icon.svg"
-                                width="20" alt="LinkedIn Icon"></a><a href="" target="_blank"
-                            class="footer-social-network-icons w-inline-block"><img
-                                src="https://uploads-ssl.webflow.com/5966ea9a9217ca534caf139f/5c8dc0112f2b6739c9ba0871_Pinterest%20Icon.svg"
-                                width="20" alt="Pinterest Icon" class=""></a>
+                                width="20" alt="Facebook Icon"></a>
                         <p class="footer-description">Email me at: <a href=""><strong
-                                    class="link-email-footer">Lorem Ipsum</strong></a><br></p>
+                                    class="link-email-footer">Here</strong></a><br></p>
                     </div>
                 </div>
             </div>

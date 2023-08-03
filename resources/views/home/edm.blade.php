@@ -1,6 +1,5 @@
 @extends('layouts-home.master-genre')
 
-
 @section('content')
     <div class="spotify-playlists">
         <div class="description">

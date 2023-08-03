@@ -5,7 +5,6 @@
     }
 
     body {
-        background: linear-gradient(to bottom, #1f1f1f, #121212, #121212, #121212, #121212);
         font-family: 'Montserrat', sans-serif;
     }
 
@@ -14,7 +13,11 @@
         left: 235px;
         right: 0;
         justify-content: space-between;
-        background: linear-gradient(to bottom, #232323, #1f1f1f);
+        /* background: linear-gradient(to bottom,
+                #EB4837 0%,
+                #EB4837 90%,
+                #121212 100%, ); */
+        background-color: transparent;
         padding: 14px 30px;
         position: fixed;
         top: 0;
@@ -40,7 +43,7 @@
         border-radius: 100%;
         font-size: 18px;
         border: 0px;
-        background-color: #090909;
+        background-color: transparent;
         margin-right: 10px;
     }
 
@@ -197,9 +200,21 @@
     #myDiv.show {
         display: block;
     }
+
+    .topbar.scroll-down {
+        background: linear-gradient(to bottom, #121212, #121212);
+        transition: background 0.5s ease-in;
+        /* Thêm hiệu ứng chuyển đổi màu mượt mà */
+    }
+
+    .topbar.scroll-down .prev-next-buttons button {
+        background-color: #090909;
+        transition: background-color 0.5s ease;
+        /* Thêm hiệu ứng chuyển đổi màu mượt mà */
+    }
 </style>
 
-<div class="topbar">
+<div class="topbar" id="topbar">
     <!-- Trong phần view của bạn -->
     <div class="prev-next-buttons">
         <button type="button" class="fa fas fa-chevron-left" onclick="previousPage()"></button>
@@ -250,8 +265,8 @@
             <li class="divider">|</li>
             </ul>
             <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Sign Up</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </li> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Sign Up</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </li> -->
             <!-- <button type="button" class="button1">Sign up</button> -->
             <button class="user-container" id="myButton">
                 <div class="user-fame" style="width: 28px; height: 28px; inset-inline-start: 0px;">
@@ -305,4 +320,16 @@
     function nextPage() {
         window.history.forward();
     }
+
+    const topbar = document.getElementById('topbar');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 110) {
+            topbar.classList.add('scroll-down');
+            prevNextButtons.classList.add('scroll-down');
+        } else {
+            topbar.classList.remove('scroll-down');
+            prevNextButtons.classList.remove('scroll-down');
+        }
+    });
 </script>

@@ -4,8 +4,19 @@
 }
 
 body {
-	background: linear-gradient(to bottom, #1f1f1f, #121212, #121212, #121212, #121212);
+	background: linear-gradient(to bottom,
+			#121212 0%,
+			#121212 8%,
+			#121212 90%,
+			#121212 100%);
 	font-family: 'Montserrat', sans-serif;
+	transition: background ease-in;
+	/* Thêm hiệu ứng chuyển đổi màu mượt mà */
+}
+
+body.scroll-down {
+	/* Màu nền sau khi scroll xuống */
+	background: linear-gradient(to bottom, #EB4837 0%, #121212 8%, #121212 90%, #121212 100%);
 }
 
 
@@ -258,45 +269,4 @@ audio::-webkit-media-controls {
 
 .hidden-audio-controls audio {
 	display: none;
-}
-
-.container-genre h1 {
-	box-sizing: border-box;
-	-webkit-tap-highlight-color: transparent;
-	margin: 16px;
-	font-size: 1.5rem;
-	color: #fff;
-	font-weight: 700;
-	font-family: var(--font-family, CircularSpTitle, CircularSpTitle-Tall, CircularSp-Arab, CircularSp-Hebr, CircularSp-Cyrl, CircularSp-Grek, CircularSp-Deva, var(--fallback-fonts, sans-serif));
-}
-
-.container-genre {
-	border: none;
-	border-radius: 8px;
-	overflow: hidden;
-	position: relative;
-	width: 100%;
-	background-color: rgb(225, 51, 0);
-	max-width: 200px;
-	max-height: 200px;
-}
-
-.genre-img {
-	width: 200px;
-	height: 200px;
-	overflow: hidden;
-	margin: 0 auto;
-
-}
-
-.genre-img img {
-	width: 55%;
-	height: auto;
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	-webkit-transform: rotate(25deg) translate(18%, -2%);
-	transform: rotate(25deg) translate(18%, -2%);
-	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
-	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
 }

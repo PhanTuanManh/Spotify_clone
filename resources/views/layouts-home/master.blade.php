@@ -52,6 +52,30 @@
                     console.log(error);
                 });
         }
+
+        const scrollThreshold = 60; // Thay đổi giá trị này thành số pixel mà bạn muốn
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > scrollThreshold) {
+                document.body.classList.add('scroll-down');
+            } else {
+                document.body.classList.remove('scroll-down');
+            }
+        });
+
+
+        window.getRandomColor = function() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        };
+
+        const randomColor = window.getRandomColor();
+        document.body.style.background =
+            `linear-gradient(to bottom, ${randomColor} 0%, #121212 8%, #121212 100%)`;
     </script>
 
 </body>

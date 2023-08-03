@@ -26,14 +26,10 @@
 
 
 
-    </div>
-    </div>
 
 
 
-
-
-    <hr>
+        <hr>
     </div>
 
     @include('layouts-home.musicplayer')
