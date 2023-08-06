@@ -192,7 +192,7 @@
                                         aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item"
                                             href="{{ route('profile.index', ['id' => auth()->user()->User_id]) }}">{{ auth()->user()->username }}</a>
-                                        <a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a>
+                                        <a class="dropdown-item" href="{{ route('logout.perform') }}">Logout</a> 
                                     </div>
                                 @endauth
                             </li>
