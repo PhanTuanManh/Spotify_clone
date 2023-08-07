@@ -15,8 +15,8 @@ class Tracks extends Model
         'Name', 'Thumbnail',
     ];
 
-    public function album()
+    public function albums()
     {
-        return $this->hasMany(Albums::class, 'Album_id', 'Album_id');
+        return $this->belongsToMany(Albums::class, 'track_album', 'track_id', 'album_id');
     }
 }
