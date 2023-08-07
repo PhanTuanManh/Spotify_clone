@@ -30,7 +30,6 @@
                     </div>
                 </div>
             </form>
-
             @guest
                 <div class="navbar">
                     <ul>
@@ -71,8 +70,8 @@
                     <li class="divider">|</li>
                     </ul>
                     <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <a href="#">Sign Up</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </li> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Sign Up</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </li> -->
                     <!-- <button type="button" class="button1">Sign up</button> -->
                     <button class="user-container" id="myButton">
                         <div class="user-fame" style="width: 28px; height: 28px; inset-inline-start: 0px;">
@@ -125,35 +124,7 @@
 
         </div>
 
-
-        <div class="spotify-playlists">
-            <div class="description">
-                <h2>Genres</h2>
-            </div>
-            <div class="list">
-                @foreach ($genres->chunk(5) as $genreChunk)
-                    <div class="row">
-                        @foreach ($genreChunk as $genre)
-                            <div class="item play-item">
-                                <div class="container-genre"
-                                    style="background-color: {{ sprintf('#%06X', mt_rand(0, 0xffffff)) }};">
-                                    <a href="{{ route('genre.show', ['name' => $genre->Name]) }}">
-                                        <h1>{{ $genre->Name }}</h1>
-                                        <div class="genre-img">
-                                            @foreach ($genre->songs()->inRandomOrder()->take(1)->get() as $song)
-                                                <img src="{{ asset('song_images/' . $song->Song_IMG) }}"
-                                                    alt="">
-                                            @endforeach
-                                        </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
-        </div>
-        {{-- 
-        <hr> --}}
+        @include('layouts-home.search-song')
     </div>
 
     @include('layouts-home.musicplayer')
@@ -181,16 +152,6 @@
                     console.log(error);
                 });
         }
-
-
-        // Lắng nghe sự kiện click trên thẻ <a> có id="search-btn"
-        document.getElementById('search-btn').addEventListener('click', function(event) {
-            // Ngăn chặn hành vi mặc định của thẻ <a> (chuyển trang)
-            event.preventDefault();
-
-            // Gửi form khi nhấn vào thẻ <a>
-            document.getElementById('search-form').submit();
-        });
     </script>
 
 </body>

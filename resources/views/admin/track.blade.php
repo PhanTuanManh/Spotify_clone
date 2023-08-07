@@ -28,40 +28,17 @@
                             <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
                         </div>
                         <div class="form-group mt-4">
-                            <label class="col-form-label">Album:</label>
-                            <div class="checkbox-list">
+                            <label for="track_album" class="col-form-label">Album:</label>
+                            <select class="form-control" id="track_album" name="album_id[]" multiple>
+                                <option value="">Select Album</option>
+                                <!-- Thêm option trống để người dùng có thể chọn -->
                                 @isset($albums)
                                     @foreach ($albums as $album)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="album_id[]"
-                                                value="{{ $album->Album_id }}" id="album{{ $album->Album_id }}"
-                                                @if (in_array($album->Album_id, old('album_id', []))) checked @endif>
-                                            <label class="form-check-label" for="album{{ $album->Album_id }}">
-                                                {{ $album->Name }}
-                                            </label>
-                                        </div>
+                                        <option value="{{ $album->Album_id }}">{{ $album->Name }}</option>
                                     @endforeach
                                 @endisset
-                            </div>
+                            </select>
                         </div>
-
-                        <!-- Include the following script -->
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                // Get all checkboxes
-                                var checkboxes = document.querySelectorAll('.form-check-input');
-
-                                checkboxes.forEach(function(checkbox) {
-                                    checkbox.addEventListener('change', function() {
-                                        // Toggle the 'checked' attribute of the parent label when the checkbox is clicked
-                                        this.parentElement.classList.toggle('checked');
-                                    });
-                                });
-                            });
-                        </script>
-
-
-                        <!-- Add other track-related fields here -->
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -69,8 +46,8 @@
                         </div>
                     </form>
 
-
                 </div>
+
 
             </div>
         </div>
@@ -95,11 +72,17 @@
                                 <th>DELETE</th>
                             </thead>
                             <tbody>
-                                @foreach ($tracks as $track)
+                                @forelse ($tracks as $track)
                                     <tr>
                                         <td>{{ $track->Track_id }}</td>
                                         <td>{{ $track->Name }}</td>
-                                        <td>{{ $track->album->Name }}</td>
+                                        <td>
+                                            @foreach ($track->albums as $album)
+                                                <!-- Hiển thị danh sách nghệ sĩ -->
+                                                {{ Str::limit($album->Name, 30) }},
+                                            @endforeach
+                                        </td>
+
                                         <td>
                                             @if ($track->Thumbnail)
                                                 <img src="{{ asset('track_thumbnails/' . $track->Thumbnail) }}"
@@ -121,15 +104,19 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6">No tracks found.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('scripts')

@@ -18,17 +18,8 @@
     @include('layouts-home.sidebar')
 
     <div class="main-container">
-
         @include('layouts-home.topbar')
-
-
         @yield('content')
-
-
-
-
-
-
         <hr>
     </div>
 

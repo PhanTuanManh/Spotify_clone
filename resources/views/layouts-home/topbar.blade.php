@@ -180,7 +180,7 @@
         border-radius: 2px;
         min-width: 200px;
         display: none;
-
+        z-index: 103;
     }
 
     #myDiv p {
@@ -199,6 +199,7 @@
 
     #myDiv.show {
         display: block;
+        z-index: 103;
     }
 
     .topbar.scroll-down {
@@ -225,7 +226,7 @@
         <div class="navbar">
             <ul>
                 <li>
-                    <a href="{{ url('/404') }}">Premium</a>
+                    <a href="{{ url('/payment') }}">Premium</a>
 
                 </li>
                 <li>
@@ -241,6 +242,7 @@
             <button type="button" class="button2" onclick="window.location.href='{{ url('/login') }}'">Log
                 in</button>
         </div>
+
     @endguest
     @auth
         <div class="navbar">
@@ -256,7 +258,7 @@
                 @else
                     <ul>
                         <li>
-                            <a href="{{ url('/404') }}">Premium</a>
+                            <a href="{{ url('/payment') }}">Premium</a>
                         </li>
                         <li>
                             <a href="{{ url('/404') }}">Download</a>
@@ -265,8 +267,8 @@
             <li class="divider">|</li>
             </ul>
             <!-- <li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a href="#">Sign Up</a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </li> -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <a href="#">Sign Up</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </li> -->
             <!-- <button type="button" class="button1">Sign up</button> -->
             <button class="user-container" id="myButton">
                 <div class="user-fame" style="width: 28px; height: 28px; inset-inline-start: 0px;">
@@ -312,6 +314,16 @@
 
 
 <script>
+    const myButton = document.getElementById("myButton");
+    const myDiv = document.getElementById("myDiv");
+
+    myButton.addEventListener("click", function() {
+        if (myDiv.classList.contains("show")) {
+            myDiv.classList.remove("show");
+        } else {
+            myDiv.classList.add("show");
+        }
+    });
     // Trong phần JavaScript của bạn
     function previousPage() {
         window.history.back();

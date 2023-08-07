@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Albums;
+use Illuminate\Support\Facades\File;
 use App\Models\Tracks;
+use App\Models\AlbumTrack;
 use Illuminate\Support\Facades\Validator;
 
 class TrackController extends Controller
@@ -12,16 +14,9 @@ class TrackController extends Controller
 
     public function index()
     {
-        $tracks = Tracks::all();
+        $tracks = Tracks::with('albums')->get();
         $albums = Albums::all();
         return view('admin.track', compact('tracks', 'albums'));
-    }
-
-    public function edit(Request $request, $id)
-    {
-        $track = Tracks::findOrFail($id);
-        $albums = Albums::all();
-        return view('admin.track-edit', compact('track', 'albums'));
     }
 
     public function store(Request $request)
@@ -47,16 +42,31 @@ class TrackController extends Controller
             $file->move($path, $fileName);
         }
 
-        $albumIds = $request->input('album_id'); // Lấy giá trị của trường album_id trong một mảng
-        $albumIdsString = implode(',', $albumIds); // Chuyển đổi mảng albumIds thành chuỗi được phân tách bằng dấu phẩy
-
         $track = new Tracks();
         $track->Name = $request->input('name');
         $track->Thumbnail = $fileName;
-        $track->Album_id = $albumIdsString; // Lưu chuỗi albumIdsString vào trường Album_id
         $track->save();
 
+        $albumIds = $request->input('album_id');
+
+        if (!empty($albumIds)) {
+            foreach ($albumIds as $albumId) {
+                $trackAlbum = new AlbumTrack(); // Corrected the model name to TrackAlbum
+                $trackAlbum->album_id = $albumId; // Use $albumId instead of $album->Album_id
+                $trackAlbum->track_id = $track->Track_id; // Assuming 'id' is the primary key of the 'Tracks' model
+                $trackAlbum->save();
+            }
+        }
+
         return redirect('/track')->with('success', 'Track added successfully');
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $track = Tracks::with('albums')->find($id);
+        $albums = Albums::all();
+        $selectedAlbums = $track->albums->pluck('Album_id')->toArray();
+        return view('admin.track-edit', compact('track', 'albums', 'selectedAlbums'));
     }
 
 
@@ -66,7 +76,8 @@ class TrackController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'album_id' => 'required|exists:albums,Album_id',
+            'album_id' => 'required|array', // Trường album_id phải là một mảng
+            'album_id.*' => 'exists:albums,Album_id', // Kiểm tra từng phần tử của mảng album_id có tồn tại trong bảng albums
         ]);
 
         if ($validator->fails()) {
@@ -76,12 +87,17 @@ class TrackController extends Controller
         }
 
         $track = Tracks::find($id);
+        $track->Name = $request->name;
 
-        $track->Name = $request->input('name');
-        $track->Album_id = $request->input('album_id');
-
-        // Handle file upload for track thumbnail
         if ($request->hasFile('thumbnail')) {
+            // Delete old thumbnail file
+            if ($track->Thumbnail) {
+                $thumbnailPath = public_path('track_thumbnails/' . $track->Thumbnail);
+                if (File::exists($thumbnailPath)) {
+                    File::delete($thumbnailPath);
+                }
+            }
+
             $thumbnail = $request->file('thumbnail');
             $thumbnailName = time() . '_' . $thumbnail->getClientOriginalName();
             $thumbnail->move(public_path('track_thumbnails'), $thumbnailName);
@@ -89,15 +105,26 @@ class TrackController extends Controller
         }
 
         $track->save();
+        $albums = $request->input('album_id');
+        $track->albums()->sync($albums);
 
-        return redirect('/track')->with('success', 'Track updated successfully');
+        return redirect('/track')->with('success', 'Album updated successfully!');
     }
 
     public function delete($id)
     {
-        $track = Tracks::findOrFail($id);
+        $track = Tracks::find($id);
+
+        // Delete thumbnail file
+        if ($track->Thumbnail) {
+            $thumbnailPath = public_path('track_thumbnails/' . $track->Thumbnail);
+            if (File::exists($thumbnailPath)) {
+                File::delete($thumbnailPath);
+            }
+        }
+
         $track->delete();
 
-        return redirect('/track')->with('success', 'Track deleted successfully');
+        return redirect('/track')->with('success', 'Album deleted successfully!');
     }
 }

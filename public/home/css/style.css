@@ -5,8 +5,11 @@
 
 body {
 	background: linear-gradient(to bottom,
-			#121212 0%,
-			#121212 8%,
+			#d04232 0%,
+			#672019 3%,
+			#461515 6%,
+			#200a0a 8%,
+			#121212 16%,
 			#121212 90%,
 			#121212 100%);
 	font-family: 'Montserrat', sans-serif;
@@ -14,10 +17,10 @@ body {
 	/* Thêm hiệu ứng chuyển đổi màu mượt mà */
 }
 
-body.scroll-down {
-	/* Màu nền sau khi scroll xuống */
-	background: linear-gradient(to bottom, #EB4837 0%, #121212 8%, #121212 90%, #121212 100%);
-}
+/* body.scroll-down {
+
+	background: linear-gradient(to bottom, #EB4837 0%, #121212 7%, #121212 90%, #121212 100%);
+} */
 
 
 .main-container {

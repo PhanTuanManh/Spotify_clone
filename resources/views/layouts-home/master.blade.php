@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png"
         href="https://th.bing.com/th/id/R.2ebc6c77ba84d7194d4a8f6a7334571e?rik=2ffoY4RHjXWJ2w&pid=ImgRaw&r=0">
     <title>Spotify clone</title>
-    <link rel="stylesheet" href="  {{ asset('home/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('home/css/style.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
@@ -62,22 +62,68 @@
                 document.body.classList.remove('scroll-down');
             }
         });
-
-
-        window.getRandomColor = function() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        };
-
-        const randomColor = window.getRandomColor();
-        document.body.style.background =
-            `linear-gradient(to bottom, ${randomColor} 0%, #121212 8%, #121212 100%)`;
     </script>
+    @guest
+        <script>
+            var canOpenAd = true; // Biến để kiểm tra xem đã chuyển hướng tới trang quảng cáo sau 5 giây chưa
 
+            function handleFirstClick(event) {
+                // Lưu trữ thông tin trong sessionStorage của trình duyệt
+                if (!sessionStorage.getItem('visited')) {
+                    // Nếu chưa có giá trị visited, đây là lần đầu tiên
+                    sessionStorage.setItem('visited', 'true');
+                    // Mở tab mới và điều hướng tới link mà bạn muốn sau khi click lần đầu tiên
+                    window.open('https://shope.ee/5KidLnpxZ2', '_blank');
+                    event.preventDefault(); // Ngăn chặn chuyển hướng ban đầu (nếu có)
+                } else {
+                    // Nếu đã có giá trị visited và có thể mở quảng cáo, sau 5 giây chuyển hướng tới trang quảng cáo mới
+                    if (canOpenAd) {
+                        setTimeout(function() {
+                            canOpenAd = true; // Cho phép mở quảng cáo mới sau 5 giây tiếp theo
+                        }, 600000); // 5000 miliseconds = 5 giây
+                        window.open('https://shope.ee/5KidLnpxZ2',
+                            '_blank'); // Thay thế bằng đường dẫn trang quảng cáo thật
+                        canOpenAd = false; // Ngăn chặn mở quảng cáo trong 5 giây tiếp theo
+                    }
+                }
+            }
+
+            // Gán sự kiện click cho toàn bộ trang
+            document.addEventListener('click', handleFirstClick);
+        </script>
+    @endguest
+
+    @auth
+        @if (auth()->user()->user_type === 'user')
+            <script>
+                var canOpenAd = true; // Biến để kiểm tra xem đã chuyển hướng tới trang quảng cáo sau 5 giây chưa
+
+                function handleFirstClick(event) {
+                    // Lưu trữ thông tin trong sessionStorage của trình duyệt
+                    if (!sessionStorage.getItem('visited')) {
+                        // Nếu chưa có giá trị visited, đây là lần đầu tiên
+                        sessionStorage.setItem('visited', 'true');
+                        // Mở tab mới và điều hướng tới link mà bạn muốn sau khi click lần đầu tiên
+                        window.open('https://shope.ee/5KidLnpxZ2', '_blank');
+                        event.preventDefault(); // Ngăn chặn chuyển hướng ban đầu (nếu có)
+                    } else {
+                        // Nếu đã có giá trị visited và có thể mở quảng cáo, sau 5 giây chuyển hướng tới trang quảng cáo mới
+                        if (canOpenAd) {
+                            setTimeout(function() {
+                                canOpenAd = true; // Cho phép mở quảng cáo mới sau 5 giây tiếp theo
+                            }, 600000); // 5000 miliseconds = 5 giây
+                            window.open('https://shope.ee/5KidLnpxZ2',
+                                '_blank'); // Thay thế bằng đường dẫn trang quảng cáo thật
+                            canOpenAd = false; // Ngăn chặn mở quảng cáo trong 5 giây tiếp theo
+                        }
+                    }
+                }
+
+                // Gán sự kiện click cho toàn bộ trang
+                document.addEventListener('click', handleFirstClick);
+            </script>
+        @endif
+    @endauth
 </body>
 
 </html>

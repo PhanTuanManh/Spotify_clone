@@ -48,6 +48,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/search', 'SearchController@index')->name('search.index');
     Route::get('/genre/{name}', 'PopController@show')->name('genre.show');
+    Route::get('/search-result', [SongController::class, 'search'])->name('song.search');
+
+
+
+    Route::get('/payment', 'PaymentController@show')->name('payment.index');
 
     Route::group(['middleware' => ['guest']], function () {
         /**
