@@ -26,23 +26,22 @@
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ $track->Name }}">
                         </div>
-                        <div class="form-group mt-4">
-                            <label for="thumbnail" class="col-form-label">Thumbnail:</label>
-                            <input type="file" class="form-control-file" id="thumbnail" name="thumbnail">
+                        <div class="form-group">
+                            <label for="thumbnail">Thumbnail:</label>
+                            <input type="file" name="thumbnail" id="thumbnail" class="form-control-file">
                             @if ($track->Thumbnail)
                                 <img src="{{ asset('track_thumbnails/' . $track->Thumbnail) }}" alt="{{ $track->Name }}"
                                     width="100">
                             @endif
                         </div>
                         <div class="form-group mt-4">
-                            <label for="album_id" class="col-form-label">Album:</label>
-                            <select class="form-control" id="album_id" name="album_id">
-                                <option value="">Select Album</option>
-                                <!-- Thêm option trống để người dùng có thể chọn -->
+                            <label for="track_album" class="col-form-label">Artist:</label>
+                            <select class="form-control" id="track_album" name="album_id[]" multiple>
+                                <option value="">Select Artist</option>
                                 @isset($albums)
                                     @foreach ($albums as $album)
                                         <option value="{{ $album->Album_id }}"
-                                            {{ $album->Album_id == $track->Album_id ? 'selected' : '' }}>
+                                            {{ in_array($album->Album_id, $selectedAlbums) ? 'selected' : '' }}>
                                             {{ $album->Name }}
                                         </option>
                                     @endforeach
